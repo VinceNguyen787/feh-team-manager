@@ -8,12 +8,17 @@ const heroes = {
     movement: "Cavalry",
     movementImg: "/images/movement-icons/cavalry.png",
     weapon: 8,
-    atkBonus: true,
+    weaponName: "Brave Lance+",
     hp: [35, 39, 42],
     atk: [30, 33, 36],
     spd: [29, 32, 35],
     def: [22, 25, 28],
-    res: [22, 25, 29]
+    res: [22, 25, 29],
+    hpMin: [16, 17, 18],
+    atkMin: [6, 7, 8],
+    spdMin: [7, 8, 9],
+    defMin: [7, 8, 9],
+    resMin: [5, 6, 7]
   },
   alfonse: {
     name: "Alfonse",
@@ -24,11 +29,17 @@ const heroes = {
     movement: "Infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 16,
+    weaponName: "Fólkvangr",
     hp: [43, 43, 43],
     atk: [35, 35, 35],
     spd: [25, 25, 25],
     def: [32, 32, 32],
-    res: [22, 22, 22]
+    res: [22, 22, 22],
+    hpMin: [19, 19, 19],
+    atkMin: [9, 9, 9],
+    spdMin: [6, 6, 6],
+    defMin: [8, 8, 8],
+    resMin: [5, 5, 5]
   },
   alm: {
     name: "Alm",
@@ -39,11 +50,17 @@ const heroes = {
     movement: "Infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 16,
+    weaponName: "Falchion",
     hp: [42, 45, 48],
     atk: [30, 33, 36],
     spd: [27, 30, 33],
     def: [24, 28, 31],
-    res: [19, 22, 25]
+    res: [19, 22, 25],
+    hpMin: [20, 21, 22],
+    atkMin: [8, 9, 10],
+    spdMin: [5, 6, 7],
+    defMin: [5, 6, 7],
+    resMin: [4, 5, 6]
   },
   amelia: {
     name: "Amelia",
@@ -54,11 +71,17 @@ const heroes = {
     movement: "armored",
     movementImg: "/images/movement-icons/armored.png",
     weapon: 14,
+    weaponName: "Slaying Axe+",
     hp: [44, 47, 50],
     atk: [31, 34, 37],
     spd: [31, 34, 37],
     def: [32, 35, 38],
-    res: [20, 23, 27]
+    res: [20, 23, 27],
+    hpMin: [18, 19, 20],
+    atkMin: [5, 6, 7],
+    spdMin: [7, 8, 9],
+    defMin: [8, 9, 10],
+    resMin: [3, 4, 5]
   },
   anna: {
     name: "Anna",
@@ -69,11 +92,17 @@ const heroes = {
     movement: "Infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 16,
+    weaponName: "Nóatún",
     hp: [41, 41, 41],
     atk: [29, 29, 29],
     spd: [38, 38, 38],
     def: [22, 22, 22],
-    res: [28, 28, 28]
+    res: [28, 28, 28],
+    hpMin: [19, 19, 19],
+    atkMin: [7, 7, 7],
+    spdMin: [10, 10, 10],
+    defMin: [5, 5, 5],
+    resMin: [6, 6, 6]
   },
   arden: {
     name: "Arden",
@@ -84,11 +113,17 @@ const heroes = {
     movement: "Armored",
     movementImg: "/images/movement-icons/armored.png",
     weapon: 8,
+    weaponName: "Brave Sword+",
     hp: [60, 60, 60],
     atk: [36, 36, 36],
     spd: [16, 16, 16],
     def: [41, 41, 41],
-    res: [16, 16, 16]
+    res: [16, 16, 16],
+    hpMin: [25, 25, 25],
+    atkMin: [10, 10, 10],
+    spdMin: [3, 3, 3],
+    defMin: [13, 13, 13],
+    resMin: [3, 3, 3]
   },
   arthur: {
     name: "Arthur",
@@ -99,11 +134,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 12,
+    weaponName: "Emerald Axe+",
     hp: [40, 43, 46],
     atk: [29, 32, 35],
     spd: [25, 29, 32],
     def: [26, 30, 33],
-    res: [21, 24, 28]
+    res: [21, 24, 28],
+    hpMin: [18, 19, 20],
+    atkMin: [7, 8, 9],
+    spdMin: [6, 7, 8],
+    defMin: [7, 8, 9],
+    resMin: [4, 5, 6]
   },
   arvis: {
     name: "Arvis",
@@ -114,11 +155,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 14,
+    weaponName: "Valflame",
     hp: [33, 33, 33],
     atk: [34, 34, 34],
     spd: [31, 31, 31],
     def: [17, 17, 17],
-    res: [33, 33, 33]
+    res: [33, 33, 33],
+    hpMin: [18, 18, 18],
+    atkMin: [8, 8, 8],
+    spdMin: [7, 7, 7],
+    defMin: [4, 4, 4],
+    resMin: [7, 7, 7]
   },
   athena: {
     name: "Athena",
@@ -129,11 +176,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 13,
+    weaponName: "Wo Dao+",
     hp: [33, 36, 40],
     atk: [28, 31, 34],
     spd: [35, 38, 41],
     def: [24, 27, 28],
-    res: [21, 24, 28]
+    res: [21, 24, 28],
+    hpMin: [16, 17, 18],
+    atkMin: [6, 7, 8],
+    spdMin: [9, 10, 11],
+    defMin: [7, 8, 9],
+    resMin: [4, 5, 6]
   },
   ayra: {
     name: "Ayra",
@@ -144,12 +197,18 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 16,
+    weaponName: "Ayra's Blade",
     spdBonus: true,
     hp: [37, 41, 44],
     atk: [30, 33, 36],
     spd: [34, 37, 40],
     def: [28, 31, 34],
-    res: [18, 21, 24]
+    res: [18, 21, 24],
+    hpMin: [18, 19, 20],
+    atkMin: [6, 7, 8],
+    spdMin: [10, 11, 12],
+    defMin: [6, 7, 8],
+    resMin: [3, 4, 5]
   },
   azama: {
     name: "Azama",
@@ -160,11 +219,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 10,
+    weaponName: "Pain+",
     hp: [40, 43, 46],
     atk: [18, 21, 24],
     spd: [23, 26, 30],
     def: [29, 32, 35],
-    res: [22, 25, 29]
+    res: [22, 25, 29],
+    hpMin: [18, 19, 20],
+    atkMin: [3, 4, 5],
+    spdMin: [6, 7, 8],
+    defMin: [7, 8, 9],
+    resMin: [5, 6, 7]
   },
   azura: {
     name: "Azura",
@@ -175,11 +240,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 12,
+    weaponName: "Sapphire Lance+",
     hp: [33, 36, 40],
     atk: [28, 31, 34],
     spd: [30, 33, 36],
     def: [18, 21, 24],
-    res: [24, 28, 31]
+    res: [24, 28, 31],
+    hpMin: [16, 17, 18],
+    atkMin: [4, 5, 6],
+    spdMin: [6, 7, 8],
+    defMin: [3, 4, 5],
+    resMin: [5, 6, 7]
   },
   azura_ny: {
     name: "Azura",
@@ -190,11 +261,17 @@ const heroes = {
     movement: "flying",
     movementImg: "/images/movement-icons/flying.png",
     weapon: 14,
+    weaponName: "Hagoita+",
     hp: [33, 37, 40],
     atk: [27, 30, 33],
     spd: [32, 35, 38],
     def: [19, 22, 25],
-    res: [22, 26, 29]
+    res: [22, 26, 29],
+    hpMin: [14, 15, 16],
+    atkMin: [5, 6, 7],
+    spdMin: [8, 9, 10],
+    defMin: [4, 5, 6],
+    resMin: [3, 4, 5]
   },
   azura_pa: {
     name: "Azura",
@@ -205,11 +282,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 16,
+    weaponName: "Urðr",
     hp: [32, 35, 39],
     atk: [29, 32, 35],
     spd: [31, 34, 37],
     def: [17, 20, 23],
-    res: [24, 28, 31]
+    res: [24, 28, 31],
+    hpMin: [15, 16, 17],
+    atkMin: [5, 6, 7],
+    spdMin: [7, 8, 9],
+    defMin: [2, 3, 4],
+    resMin: [5, 6, 7]
   },
   barst: {
     name: "Barst",
@@ -220,11 +303,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 8,
+    weaponName: "Brave Axe+",
     hp: [43, 46, 49],
     atk: [30, 33, 36],
     spd: [29, 32, 35],
     def: [27, 30, 33],
-    res: [13, 17, 20]
+    res: [13, 17, 20],
+    hpMin: [19, 20, 21],
+    atkMin: [8, 9, 10],
+    spdMin: [7, 8, 9],
+    defMin: [5, 6, 7],
+    resMin: [3, 4, 5]
   },
   bartre: {
     name: "Bartre",
@@ -235,11 +324,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 12,
+    weaponName: "Hammer+",
     hp: [46, 49, 52],
     atk: [33, 36, 39],
     spd: [22, 25, 29],
     def: [30, 33, 36],
-    res: [10, 13, 17]
+    res: [10, 13, 17],
+    hpMin: [20, 21, 22],
+    atkMin: [9, 10, 11],
+    spdMin: [5, 6, 7],
+    defMin: [6, 7, 8],
+    resMin: [2, 3, 4]
   },
   berkut: {
     name: "Berkut",
@@ -250,11 +345,17 @@ const heroes = {
     movement: "cavalry",
     movementImg: "/images/movement-icons/cavalry.png",
     weapon: 14,
+    weaponName: "Berkut's Lance",
     hp: [43, 43, 43],
     atk: [34, 34, 34],
     spd: [22, 22, 22],
     def: [31, 31, 31],
-    res: [24, 24, 24]
+    res: [24, 24, 24],
+    hpMin: [19, 19, 19],
+    atkMin: [8, 8, 8],
+    spdMin: [5, 5, 5],
+    defMin: [7, 7, 7],
+    resMin: [7, 7, 7]
   },
   beruka: {
     name: "Beruka",
@@ -265,11 +366,17 @@ const heroes = {
     movement: "Flying",
     movementImg: "/images/movement-icons/flying.png",
     weapon: 11,
+    weaponName: "Killer Axe+",
     hp: [43, 46, 49],
     atk: [25, 29, 32],
     spd: [20, 23, 26],
     def: [34, 37, 40],
-    res: [19, 22, 25]
+    res: [19, 22, 25],
+    hpMin: [19, 20, 21],
+    atkMin: [6, 7, 8],
+    spdMin: [5, 6, 7],
+    defMin: [8, 9, 10],
+    resMin: [4, 5, 6]
   },
   blackKnight: {
     name: "Black Knight",
@@ -280,11 +387,17 @@ const heroes = {
     movement: "armored",
     movementImg: "/images/movement-icons/armored.png",
     weapon: 16,
+    weaponName: "Alondite",
     hp: [48, 48, 48],
     atk: [34, 34, 34],
     spd: [34, 34, 34],
     def: [35, 35, 35],
-    res: [18, 18, 18]
+    res: [18, 18, 18],
+    hpMin: [22, 22, 22],
+    atkMin: [10, 10, 10],
+    spdMin: [8, 8, 8],
+    defMin: [9, 9, 9],
+    resMin: [5, 5, 5]
   },
   boey: {
     name: "Boey",
@@ -295,11 +408,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 10,
+    weaponName: "Gronnowl+",
     hp: [40, 43, 46],
     atk: [25, 29, 32],
     spd: [23, 27, 30],
     def: [29, 32, 35],
-    res: [14, 18, 21]
+    res: [14, 18, 21],
+    hpMin: [18, 19, 20],
+    atkMin: [6, 7, 8],
+    spdMin: [4, 5, 6],
+    defMin: [7, 8, 9],
+    resMin: [4, 5, 6]
   },
   caeda: {
     name: "Caeda",
@@ -310,11 +429,17 @@ const heroes = {
     movement: "flying",
     movementImg: "/images/movement-icons/Flying.png",
     weapon: 12,
+    weaponName: "Armorslayer+",
     hp: [33, 36, 40],
     atk: [22, 25, 29],
     spd: [34, 37, 40],
     def: [21, 24, 28],
-    res: [31, 34, 37]
+    res: [31, 34, 37],
+    hpMin: [16, 17, 18],
+    atkMin: [5, 6, 7],
+    spdMin: [8, 9, 10],
+    defMin: [4, 5, 6],
+    resMin: [9, 10, 11]
   },
   caeda_bb: {
     name: "Caeda",
@@ -325,11 +450,17 @@ const heroes = {
     movement: "infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 12,
+    weaponName: "Blessed Bouquet+",
     hp: [30, 33, 36],
     atk: [25, 29, 32],
     spd: [34, 37, 40],
     def: [16, 19, 22],
-    res: [26, 30, 33]
+    res: [26, 30, 33],
+    hpMin: [15, 16, 17],
+    atkMin: [6, 7, 8],
+    spdMin: [8, 9, 10],
+    defMin: [3, 4, 5],
+    resMin: [7, 8, 9]
   },
   cain: {
     name: "Cain",
@@ -340,11 +471,17 @@ const heroes = {
     movement: "cavalry",
     movementImg: "/images/movement-icons/cavalry.png",
     weapon: 8,
+    weaponName: "Brave Sword+",
     hp: [39, 42, 45],
     atk: [29, 32, 35],
     spd: [29, 32, 35],
     def: [24, 27, 31],
-    res: [18, 21, 24]
+    res: [18, 21, 24],
+    hpMin: [17, 18, 19],
+    atkMin: [7, 8, 9],
+    spdMin: [5, 6, 7],
+    defMin: [7, 8, 9],
+    resMin: [5, 6, 7]
   },
   camilla: {
     name: "Camilla",
@@ -355,11 +492,17 @@ const heroes = {
     movement: "flying",
     movementImg: "/images/movement-icons/flying.png",
     weapon: 8,
+    weaponName: "Brave Axe+",
     hp: [34, 37, 41],
     atk: [26, 30, 33],
     spd: [29, 32, 35],
     def: [24, 28, 31],
-    res: [28, 31, 34]
+    res: [28, 31, 34],
+    hpMin: [17, 18, 19],
+    atkMin: [7, 8, 9],
+    spdMin: [7, 8, 9],
+    defMin: [5, 6, 7],
+    resMin: [6, 7, 8]
   },
   camilla_ny: {
     name: "Camilla",
@@ -370,11 +513,17 @@ const heroes = {
     movement: "flying",
     movementImg: "/images/movement-icons/flying.png",
     weapon: 14,
+    weaponName: "Kadomatsu+",
     hp: [36, 40, 43],
     atk: [30, 33, 36],
     spd: [32, 35, 38],
     def: [28, 31, 34],
-    res: [20, 23, 27]
+    res: [20, 23, 27],
+    hpMin: [17, 18, 19],
+    atkMin: [8, 9, 10],
+    spdMin: [8, 9, 10],
+    defMin: [6, 7, 8],
+    resMin: [3, 4, 5]
   },
   fjorm: {
     name: "Fjorm",
@@ -385,11 +534,17 @@ const heroes = {
     movement: "Infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 16,
+    weaponName: "Leiptr",
     hp: [35, 39, 42],
     atk: [26, 30, 33],
     spd: [28, 31, 34],
     def: [26, 30, 33],
-    res: [31, 34, 37]
+    res: [31, 34, 37],
+    hpMin: [16, 17, 18],
+    atkMin: [7, 8, 9],
+    spdMin: [6, 7, 8],
+    defMin: [7, 8, 9],
+    resMin: [7, 8, 9]
   },
   sharena: {
     name: "Sharena",
@@ -400,11 +555,17 @@ const heroes = {
     movement: "Infantry",
     movementImg: "/images/movement-icons/infantry.png",
     weapon: 16,
+    weaponName: "Fensalir",
     hp: [43, 43, 43],
     atk: [32, 32, 32],
     spd: [32, 32, 32],
     def: [29, 29, 29],
-    res: [22, 22, 22]
+    res: [22, 22, 22],
+    hpMin: [19, 19, 19],
+    atkMin: [8, 8, 8],
+    spdMin: [8, 8, 8],
+    defMin: [7, 7, 7],
+    resMin: [5, 5, 5]
   }
 };
 
@@ -418,11 +579,17 @@ const heroes = {
     movement: "",
     movementImg: "/images/movement-icons/.png",
     weapon: ,
+    weaponName: ,
     hp: [],
     atk: [],
     spd: [],
     def: [],
     res: []
+    hpMin:[],
+    atkMin:[],
+    spdMin:[],
+    defMin:[],
+    resMin:[],
   },
 */
 

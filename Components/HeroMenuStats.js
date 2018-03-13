@@ -14,6 +14,7 @@ class HeroMenuStats extends React.Component {
     res: 0,
 
     equipped: false,
+    maxLvl: true,
 
     hpBane: false,
     hpBoon: false,
@@ -46,20 +47,47 @@ class HeroMenuStats extends React.Component {
 
   /* Set Stats */
   setStats = details => {
+    if (this.state.maxLvl) {
+      this.setState({
+        hp:
+          details.hp[1] + (this.state.equipped ? (details.hpBonus ? 3 : 0) : 0),
+        atk:
+          details.atk[1] +
+          (this.state.equipped
+            ? details.atkBonus ? details.weapon + 3 : details.weapon
+            : 0),
+        spd:
+          details.spd[1] +
+          (this.state.equipped ? (details.spdBonus ? 3 : 0) : 0),
+        def:
+          details.def[1] +
+          (this.state.equipped ? (details.defBonus ? 3 : 0) : 0),
+        res:
+          details.res[1] +
+          (this.state.equipped ? (details.resBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        hp:
+          details.hpMin[1] +
+          (this.state.equipped ? (details.hpBonus ? 3 : 0) : 0),
+        atk:
+          details.atkMin[1] +
+          (this.state.equipped
+            ? details.atkBonus ? details.weapon + 3 : details.weapon
+            : 0),
+        spd:
+          details.spdMin[1] +
+          (this.state.equipped ? (details.spdBonus ? 3 : 0) : 0),
+        def:
+          details.defMin[1] +
+          (this.state.equipped ? (details.defBonus ? 3 : 0) : 0),
+        res:
+          details.resMin[1] +
+          (this.state.equipped ? (details.resBonus ? 3 : 0) : 0)
+      });
+    }
     this.setState({
-      hp: details.hp[1] + (this.state.equipped ? (details.hpBonus ? 3 : 0) : 0),
-      atk:
-        details.atk[1] +
-        (this.state.equipped
-          ? details.atkBonus ? details.weapon + 3 : details.weapon
-          : 0),
-      spd:
-        details.spd[1] + (this.state.equipped ? (details.spdBonus ? 3 : 0) : 0),
-      def:
-        details.def[1] + (this.state.equipped ? (details.defBonus ? 3 : 0) : 0),
-      res:
-        details.res[1] + (this.state.equipped ? (details.resBonus ? 3 : 0) : 0),
-
       hpBane: false,
       hpBoon: false,
       atkBane: false,
@@ -156,32 +184,143 @@ class HeroMenuStats extends React.Component {
     }
   };
 
+  /* Handle Level 40 Radio Button Click */
+  handleMaxClick = () => {
+    if (this.props.details.name) {
+      this.setState({
+        maxLvl: true,
+        hpBane: false,
+        hpBoon: false,
+        atkBane: false,
+        atkBoon: false,
+        spdBane: false,
+        spdBoon: false,
+        defBane: false,
+        defBoon: false,
+        resBane: false,
+        resBoon: false,
+
+        hp:
+          this.props.details.hp[1] +
+          (this.state.equipped ? (this.props.details.hpBonus ? 3 : 0) : 0),
+        atk:
+          this.props.details.atk[1] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0),
+        spd:
+          this.props.details.spd[1] +
+          (this.state.equipped ? (this.props.details.spdBonus ? 3 : 0) : 0),
+        def:
+          this.props.details.def[1] +
+          (this.state.equipped ? (this.props.details.defBonus ? 3 : 0) : 0),
+        res:
+          this.props.details.res[1] +
+          (this.state.equipped ? (this.props.details.resBonus ? 3 : 0) : 0)
+      });
+    }
+  };
+
+  /* Handle Level 1 Radio Button Click */
+  handleMinClick = () => {
+    if (this.props.details.name) {
+      this.setState({
+        maxLvl: false,
+        hpBane: false,
+        hpBoon: false,
+        atkBane: false,
+        atkBoon: false,
+        spdBane: false,
+        spdBoon: false,
+        defBane: false,
+        defBoon: false,
+        resBane: false,
+        resBoon: false,
+
+        hp:
+          this.props.details.hpMin[1] +
+          (this.state.equipped ? (this.props.details.hpBonus ? 3 : 0) : 0),
+        atk:
+          this.props.details.atkMin[1] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0),
+        spd:
+          this.props.details.spdMin[1] +
+          (this.state.equipped ? (this.props.details.spdBonus ? 3 : 0) : 0),
+        def:
+          this.props.details.defMin[1] +
+          (this.state.equipped ? (this.props.details.defBonus ? 3 : 0) : 0),
+        res:
+          this.props.details.resMin[1] +
+          (this.state.equipped ? (this.props.details.resBonus ? 3 : 0) : 0)
+      });
+    }
+  };
+
   /* HP Event Handlers */
   handleHpClickBane = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        hp:
+          this.props.details.hp[0] +
+          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        hp:
+          this.props.details.hpMin[0] +
+          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      hp:
-        this.props.details.hp[0] +
-        (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0),
       hpBane: true,
       hpBoon: false
     });
   };
 
   handleHpClickNeutral = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        hp:
+          this.props.details.hp[1] +
+          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        hp:
+          this.props.details.hpMin[1] +
+          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      hp:
-        this.props.details.hp[1] +
-        (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0),
       hpBane: false,
       hpBoon: false
     });
   };
 
   handleHpClickBoon = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        hp:
+          this.props.details.hp[2] +
+          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        hp:
+          this.props.details.hpMin[2] +
+          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      hp:
-        this.props.details.hp[2] +
-        (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0),
       hpBane: false,
       hpBoon: true
     });
@@ -189,42 +328,87 @@ class HeroMenuStats extends React.Component {
 
   /* Atk Event Handlers */
   handleAtkClickBane = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        atk:
+          this.props.details.atk[0] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0)
+      });
+    } else {
+      this.setState({
+        atk:
+          this.props.details.atkMin[0] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0)
+      });
+    }
+
     this.setState({
-      atk:
-        this.props.details.atk[0] +
-        (this.state.equipped
-          ? this.props.details.atkBonus
-            ? this.props.details.weapon + 3
-            : this.props.details.weapon
-          : 0),
       atkBane: true,
       atkBoon: false
     });
   };
 
   handleAtkClickNeutral = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        atk:
+          this.props.details.atk[1] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0)
+      });
+    } else {
+      this.setState({
+        atk:
+          this.props.details.atkMin[1] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0)
+      });
+    }
+
     this.setState({
-      atk:
-        this.props.details.atk[1] +
-        (this.state.equipped
-          ? this.props.details.atkBonus
-            ? this.props.details.weapon + 3
-            : this.props.details.weapon
-          : 0),
       atkBane: false,
       atkBoon: false
     });
   };
 
   handleAtkClickBoon = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        atk:
+          this.props.details.atk[2] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0)
+      });
+    } else {
+      this.setState({
+        atk:
+          this.props.details.atkMin[2] +
+          (this.state.equipped
+            ? this.props.details.atkBonus
+              ? this.props.details.weapon + 3
+              : this.props.details.weapon
+            : 0)
+      });
+    }
+
     this.setState({
-      atk:
-        this.props.details.atk[2] +
-        (this.state.equipped
-          ? this.props.details.atkBonus
-            ? this.props.details.weapon + 3
-            : this.props.details.weapon
-          : 0),
       atkBane: false,
       atkBoon: true
     });
@@ -232,30 +416,63 @@ class HeroMenuStats extends React.Component {
 
   /* Spd Event Handlers */
   handleSpdClickBane = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        spd:
+          this.props.details.spd[0] +
+          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        spd:
+          this.props.details.spdMin[0] +
+          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      spd:
-        this.props.details.spd[0] +
-        (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0),
       spdBane: true,
       spdBoon: false
     });
   };
 
   handleSpdClickNeutral = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        spd:
+          this.props.details.spd[1] +
+          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        spd:
+          this.props.details.spdMin[1] +
+          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      spd:
-        this.props.details.spd[1] +
-        (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0),
       spdBane: false,
       spdBoon: false
     });
   };
 
   handleSpdClickBoon = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        spd:
+          this.props.details.spd[2] +
+          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        spd:
+          this.props.details.spdMin[2] +
+          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      spd:
-        this.props.details.spd[2] +
-        (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0),
       spdBane: false,
       spdBoon: true
     });
@@ -263,30 +480,63 @@ class HeroMenuStats extends React.Component {
 
   /* Def Event Handlers */
   handleDefClickBane = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        def:
+          this.props.details.def[0] +
+          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        def:
+          this.props.details.defMin[0] +
+          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      def:
-        this.props.details.def[0] +
-        (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0),
       defBane: true,
       defBoon: false
     });
   };
 
   handleDefClickNeutral = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        def:
+          this.props.details.def[1] +
+          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        def:
+          this.props.details.defMin[1] +
+          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      def:
-        this.props.details.def[1] +
-        (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0),
       defBane: false,
       defBoon: false
     });
   };
 
   handleDefClickBoon = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        def:
+          this.props.details.def[2] +
+          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        def:
+          this.props.details.defMin[2] +
+          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      def:
-        this.props.details.def[2] +
-        (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0),
       defBane: false,
       defBoon: true
     });
@@ -294,30 +544,63 @@ class HeroMenuStats extends React.Component {
 
   /* Res Event Handlers */
   handleResClickBane = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        res:
+          this.props.details.res[0] +
+          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        res:
+          this.props.details.resMin[0] +
+          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      res:
-        this.props.details.res[0] +
-        (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0),
       resBane: true,
       resBoon: false
     });
   };
 
   handleResClickNeutral = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        res:
+          this.props.details.res[1] +
+          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        res:
+          this.props.details.resMin[1] +
+          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      res:
-        this.props.details.res[1] +
-        (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0),
       resBane: false,
       resBoon: false
     });
   };
 
   handleResClickBoon = () => {
+    if (this.state.maxLvl) {
+      this.setState({
+        res:
+          this.props.details.res[2] +
+          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+      });
+    } else {
+      this.setState({
+        res:
+          this.props.details.resMin[2] +
+          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+      });
+    }
+
     this.setState({
-      res:
-        this.props.details.res[2] +
-        (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0),
       resBane: false,
       resBoon: true
     });
@@ -404,11 +687,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.hp
-                      ? this.state.equipped
-                        ? this.props.details.hpBonus
-                          ? this.props.details.hp[0] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.hpBonus
+                            ? this.props.details.hp[0] + 3
+                            : this.props.details.hp[0]
                           : this.props.details.hp[0]
-                        : this.props.details.hp[0]
+                        : this.state.equipped
+                          ? this.props.details.hpBonus
+                            ? this.props.details.hpMin[0] + 3
+                            : this.props.details.hpMin[0]
+                          : this.props.details.hpMin[0]
                       : "Bane"}
                   </a>
                   <a
@@ -418,11 +707,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.hp
-                      ? this.state.equipped
-                        ? this.props.details.hpBonus
-                          ? this.props.details.hp[1] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.hpBonus
+                            ? this.props.details.hp[1] + 3
+                            : this.props.details.hp[1]
                           : this.props.details.hp[1]
-                        : this.props.details.hp[1]
+                        : this.state.equipped
+                          ? this.props.details.hpBonus
+                            ? this.props.details.hpMin[1] + 3
+                            : this.props.details.hpMin[1]
+                          : this.props.details.hpMin[1]
                       : "Neutral"}
                   </a>
                   <a
@@ -432,55 +727,62 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.hp
-                      ? this.state.equipped
-                        ? this.props.details.hpBonus
-                          ? this.props.details.hp[2] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.hpBonus
+                            ? this.props.details.hp[2] + 3
+                            : this.props.details.hp[2]
                           : this.props.details.hp[2]
-                        : this.props.details.hp[2]
+                        : this.state.equipped
+                          ? this.props.details.hpBonus
+                            ? this.props.details.hpMin[2] + 3
+                            : this.props.details.hpMin[2]
+                          : this.props.details.hpMin[2]
                       : "Boon"}
                   </a>
                 </div>
               </div>
             </div>
           </span>
+          {/* Checkbox and Radio Button */}
           <span className="column is-narrow">
             <label className="checkbox">
               <input type="checkbox" onClick={this.handleWeaponClick} /> Weapon
               Equipped
             </label>
+            <div className="control">
+              <label className="radio">
+                <input
+                  type="radio"
+                  name="level"
+                  onClick={this.handleMinClick}
+                />
+                &nbsp;Level 1 &nbsp;&nbsp;&nbsp;
+              </label>
+              <label className="radio">
+                <input
+                  type="radio"
+                  name="level"
+                  onClick={this.handleMaxClick}
+                  defaultChecked
+                />
+                &nbsp;Level 40
+              </label>
+            </div>
           </span>
-          {/* Second Column Here */}
+          {/* Weapon Display */}
           <span className="column is-offset-1">
             <img
               src={misc.weapon_skill.image}
               alt={misc.weapon_skill.name}
               width="35"
             />
-            <div className="dropdown is-hoverable">
-              <div className="dropdown-trigger">
-                <button
-                  className="button"
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>Dropdown button</span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true" />
-                  </span>
-                </button>
-              </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <a className="dropdown-item">Dropdown item</a>
-                  <a className="dropdown-item">Other dropdown item</a>
-                  <a className="dropdown-item is-active">
-                    Active dropdown item
-                  </a>
-                  <a className="dropdown-item">Other dropdown item</a>
-                  <hr className="dropdown-divider" />
-                  <a className="dropdown-item">With a divider</a>
-                </div>
-              </div>
+            <div className="dropdown">
+              <button className="button">
+                {this.props.details.weaponName
+                  ? this.props.details.weaponName
+                  : "None"}
+              </button>
             </div>
           </span>
         </div>
@@ -516,12 +818,22 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.atk
-                      ? this.props.details.atk[0] +
-                        (this.state.equipped
+                      ? this.state.maxLvl
+                        ? this.state.equipped
                           ? this.props.details.atkBonus
-                            ? this.props.details.weapon + 3
+                            ? this.props.details.atk[0] +
+                              this.props.details.weapon +
+                              3
+                            : this.props.details.atk[0] +
+                              this.props.details.weapon
+                          : this.props.details.atk[0]
+                        : this.state.equipped
+                          ? this.props.details.atkBonus
+                            ? this.props.details.atkMin[0] +
+                              this.props.details.weapon +
+                              3
                             : this.props.details.weapon
-                          : 0)
+                          : this.props.details.atkMin[0]
                       : "Bane"}
                   </a>
                   <a
@@ -531,12 +843,22 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.atk
-                      ? this.props.details.atk[1] +
-                        (this.state.equipped
+                      ? this.state.maxLvl
+                        ? this.state.equipped
                           ? this.props.details.atkBonus
-                            ? this.props.details.weapon + 3
+                            ? this.props.details.atk[1] +
+                              this.props.details.weapon +
+                              3
+                            : this.props.details.atk[1] +
+                              this.props.details.weapon
+                          : this.props.details.atk[1]
+                        : this.state.equipped
+                          ? this.props.details.atkBonus
+                            ? this.props.details.atkMin[1] +
+                              this.props.details.weapon +
+                              3
                             : this.props.details.weapon
-                          : 0)
+                          : this.props.details.atkMin[1]
                       : "Neutral"}
                   </a>
                   <a
@@ -546,12 +868,22 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.atk
-                      ? this.props.details.atk[2] +
-                        (this.state.equipped
+                      ? this.state.maxLvl
+                        ? this.state.equipped
                           ? this.props.details.atkBonus
-                            ? this.props.details.weapon + 3
+                            ? this.props.details.atk[2] +
+                              this.props.details.weapon +
+                              3
+                            : this.props.details.atk[2] +
+                              this.props.details.weapon
+                          : this.props.details.atk[2]
+                        : this.state.equipped
+                          ? this.props.details.atkBonus
+                            ? this.props.details.atkMin[2] +
+                              this.props.details.weapon +
+                              3
                             : this.props.details.weapon
-                          : 0)
+                          : this.props.details.atkMin[2]
                       : "Boon"}
                   </a>
                 </div>
@@ -588,11 +920,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.spd
-                      ? this.state.equipped
-                        ? this.props.details.spdBonus
-                          ? this.props.details.spd[0] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.spdBonus
+                            ? this.props.details.spd[0] + 3
+                            : this.props.details.spd[0]
                           : this.props.details.spd[0]
-                        : this.props.details.spd[0]
+                        : this.state.equipped
+                          ? this.props.details.spdBonus
+                            ? this.props.details.spdMin[0] + 3
+                            : this.props.details.spdMin[0]
+                          : this.props.details.spdMin[0]
                       : "Bane"}
                   </a>
                   <a
@@ -602,11 +940,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.spd
-                      ? this.state.equipped
-                        ? this.props.details.spdBonus
-                          ? this.props.details.spd[1] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.spdBonus
+                            ? this.props.details.spd[1] + 3
+                            : this.props.details.spd[1]
                           : this.props.details.spd[1]
-                        : this.props.details.spd[1]
+                        : this.state.equipped
+                          ? this.props.details.spdBonus
+                            ? this.props.details.spdMin[1] + 3
+                            : this.props.details.spdMin[1]
+                          : this.props.details.spdMin[1]
                       : "Neutral"}
                   </a>
                   <a
@@ -616,11 +960,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.spd
-                      ? this.state.equipped
-                        ? this.props.details.spdBonus
-                          ? this.props.details.spd[2] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.spdBonus
+                            ? this.props.details.spd[2] + 3
+                            : this.props.details.spd[2]
                           : this.props.details.spd[2]
-                        : this.props.details.spd[2]
+                        : this.state.equipped
+                          ? this.props.details.spdBonus
+                            ? this.props.details.spdMin[2] + 3
+                            : this.props.details.spdMin[2]
+                          : this.props.details.spdMin[2]
                       : "Boon"}
                   </a>
                 </div>
@@ -660,11 +1010,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.def
-                      ? this.state.equipped
-                        ? this.props.details.defBonus
-                          ? this.props.details.def[0] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.defBonus
+                            ? this.props.details.def[0] + 3
+                            : this.props.details.def[0]
                           : this.props.details.def[0]
-                        : this.props.details.def[0]
+                        : this.state.equipped
+                          ? this.props.details.defBonus
+                            ? this.props.details.defMin[0] + 3
+                            : this.props.details.defMin[0]
+                          : this.props.details.defMin[0]
                       : "Bane"}
                   </a>
                   <a
@@ -674,11 +1030,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.def
-                      ? this.state.equipped
-                        ? this.props.details.defBonus
-                          ? this.props.details.def[1] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.defBonus
+                            ? this.props.details.def[1] + 3
+                            : this.props.details.def[1]
                           : this.props.details.def[1]
-                        : this.props.details.def[1]
+                        : this.state.equipped
+                          ? this.props.details.defBonus
+                            ? this.props.details.defMin[1] + 3
+                            : this.props.details.defMin[1]
+                          : this.props.details.defMin[1]
                       : "Neutral"}
                   </a>
                   <a
@@ -688,11 +1050,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.def
-                      ? this.state.equipped
-                        ? this.props.details.defBonus
-                          ? this.props.details.def[2] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.defBonus
+                            ? this.props.details.def[2] + 3
+                            : this.props.details.def[2]
                           : this.props.details.def[2]
-                        : this.props.details.def[2]
+                        : this.state.equipped
+                          ? this.props.details.defBonus
+                            ? this.props.details.defMin[2] + 3
+                            : this.props.details.defMin[2]
+                          : this.props.details.defMin[2]
                       : "Boon"}
                   </a>
                 </div>
@@ -729,11 +1097,17 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.res
-                      ? this.state.equipped
-                        ? this.props.details.resBonus
-                          ? this.props.details.res[0] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.resBonus
+                            ? this.props.details.res[0] + 3
+                            : this.props.details.res[0]
                           : this.props.details.res[0]
-                        : this.props.details.res[0]
+                        : this.state.equipped
+                          ? this.props.details.resBonus
+                            ? this.props.details.resMin[0] + 3
+                            : this.props.details.resMin[0]
+                          : this.props.details.resMin[0]
                       : "Bane"}
                   </a>
                   <a
@@ -743,12 +1117,18 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.res
-                      ? this.state.equipped
-                        ? this.props.details.resBonus
-                          ? this.props.details.res[1] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.resBonus
+                            ? this.props.details.res[1] + 3
+                            : this.props.details.res[1]
                           : this.props.details.res[1]
-                        : this.props.details.res[1]
-                      : "Bane"}
+                        : this.state.equipped
+                          ? this.props.details.resBonus
+                            ? this.props.details.resMin[1] + 3
+                            : this.props.details.resMin[1]
+                          : this.props.details.resMin[1]
+                      : "Neutral"}
                   </a>
                   <a
                     className="dropdown-item-boon"
@@ -757,12 +1137,18 @@ class HeroMenuStats extends React.Component {
                     }
                   >
                     {this.props.details.res
-                      ? this.state.equipped
-                        ? this.props.details.resBonus
-                          ? this.props.details.res[2] + 3
+                      ? this.state.maxLvl
+                        ? this.state.equipped
+                          ? this.props.details.resBonus
+                            ? this.props.details.res[2] + 3
+                            : this.props.details.res[2]
                           : this.props.details.res[2]
-                        : this.props.details.res[2]
-                      : "Bane"}
+                        : this.state.equipped
+                          ? this.props.details.resBonus
+                            ? this.props.details.resMin[2] + 3
+                            : this.props.details.resMin[2]
+                          : this.props.details.resMin[2]
+                      : "Boon"}
                   </a>
                 </div>
               </div>
