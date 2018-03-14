@@ -21,7 +21,10 @@ class IconsBar extends React.Component {
     infantry: false,
     cavalry: false,
     flier: false,
-    armored: false
+    armored: false,
+
+    weaponArray: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    movementArray: [1, 1, 1, 1]
   };
 
   // Event Handlers for Weapon Types
@@ -38,78 +41,197 @@ class IconsBar extends React.Component {
       bow: false,
       dagger: false,
       staff: false,
-      stone: false
+      stone: false,
+
+      weaponArray: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     });
+
+    let newArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleSwordClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[0] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      redSword: true
+      redSword: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleLanceClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[1] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      blueLance: true
+      blueLance: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleAxeClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[2] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      greenAxe: true
+      greenAxe: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleRedTomeClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[3] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      redTome: true
+      redTome: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleBlueTomeClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[4] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      blueTome: true
+      blueTome: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleGreenTomeClick = () => {
-    this.setState({
-      allWeapon: false,
-      greenTome: true
-    });
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[5] = 1;
+    }
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleBowClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[6] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      bow: true
+      bow: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleDaggerClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[7] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      dagger: true
+      dagger: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleStaffClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[8] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      staff: true
+      staff: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   handleStoneClick = () => {
+    let newArray = [];
+    if (this.state.allWeapon) {
+      newArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+    } else {
+      newArray = this.state.weaponArray;
+      newArray[9] = 1;
+    }
+
     this.setState({
       allWeapon: false,
-      stone: true
+      stone: true,
+
+      weaponArray: newArray
     });
+
+    this.props.filterHeroes(newArray, this.state.movementArray);
   };
 
   // Event Handlers for Movement Types
@@ -119,36 +241,90 @@ class IconsBar extends React.Component {
       infantry: false,
       cavalry: false,
       flier: false,
-      armored: false
+      armored: false,
+
+      movementArray: [1, 1, 1, 1]
     });
+
+    let newArray = [1, 1, 1, 1];
+
+    this.props.filterHeroes(this.state.weaponArray, newArray);
   };
 
   handleInfantryClick = () => {
+    let newArray = [];
+    if (this.state.allMovement) {
+      newArray = [1, 0, 0, 0];
+    } else {
+      newArray = this.state.movementArray;
+      newArray[0] = 1;
+    }
+
     this.setState({
       allMovement: false,
-      infantry: true
+      infantry: true,
+
+      movementArray: newArray
     });
+
+    this.props.filterHeroes(this.state.weaponArray, newArray);
   };
 
   handleCavalryClick = () => {
+    let newArray = [];
+    if (this.state.allMovement) {
+      newArray = [0, 1, 0, 0];
+    } else {
+      newArray = this.state.movementArray;
+      newArray[1] = 1;
+    }
+
     this.setState({
       allMovement: false,
-      cavalry: true
+      cavalry: true,
+
+      movementArray: newArray
     });
+
+    this.props.filterHeroes(this.state.weaponArray, newArray);
   };
 
   handleFlierClick = () => {
+    let newArray = [];
+    if (this.state.allMovement) {
+      newArray = [0, 0, 1, 0];
+    } else {
+      newArray = this.state.movementArray;
+      newArray[2] = 1;
+    }
+
     this.setState({
       allMovement: false,
-      flier: true
+      flier: true,
+
+      movementArray: newArray
     });
+
+    this.props.filterHeroes(this.state.weaponArray, newArray);
   };
 
   handleArmoredClick = () => {
+    let newArray = [];
+    if (this.state.allMovement) {
+      newArray = [0, 0, 0, 1];
+    } else {
+      newArray = this.state.movementArray;
+      newArray[3] = 1;
+    }
+
     this.setState({
       allMovement: false,
-      armored: true
+      armored: true,
+
+      movementArray: newArray
     });
+
+    this.props.filterHeroes(this.state.weaponArray, newArray);
   };
 
   render() {
