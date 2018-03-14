@@ -8,20 +8,6 @@ class HeroMenu extends React.Component {
     heroes: heroes
   };
 
-  /*tempClick = () => {
-    let array;
-    let array2 = [];
-    array = Object.keys(heroes).map(key => heroes[key]);
-    console.log(array[0]);
-    console.log(array.length);
-    for (let i = 0; i < array.length; i++) {
-      if (array[i].blueLance) {
-        array2.push(array[i]);
-      }
-    }
-    this.setState({ heroes: array2 });
-  };*/
-
   fillInStats = details => {
     this.props.fillInStats(details);
     this.checkDeselect();

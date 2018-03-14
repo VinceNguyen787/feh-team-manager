@@ -612,7 +612,7 @@ class HeroMenuStats extends React.Component {
       <div>
         {/* Row 1 - Icon, Name, and Epithet */}
         <div className="columns">
-          <span className="column is-one-fifth is-narrow">
+          <span className="column is-narrow">
             <figure className="image is-96x96">
               <img
                 src={
