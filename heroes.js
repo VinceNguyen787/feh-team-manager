@@ -4,6 +4,7 @@ const heroes = {
     epithet: "The Panther",
     image: "/images/hero-portraits/abel.png",
     type: "Blue Lance",
+    blueLance: true,
     typeImg: "/images/weapon-icons/blue-lance.png",
     movement: "Cavalry",
     movementImg: "/images/movement-icons/cavalry.png",

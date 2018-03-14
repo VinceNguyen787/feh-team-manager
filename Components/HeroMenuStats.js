@@ -225,9 +225,10 @@ class HeroMenuStats extends React.Component {
 
   /* Handle Level 1 Radio Button Click */
   handleMinClick = () => {
+    this.setState({ maxLvl: false });
+
     if (this.props.details.name) {
       this.setState({
-        maxLvl: false,
         hpBane: false,
         hpBoon: false,
         atkBane: false,
@@ -832,7 +833,8 @@ class HeroMenuStats extends React.Component {
                             ? this.props.details.atkMin[0] +
                               this.props.details.weapon +
                               3
-                            : this.props.details.weapon
+                            : this.props.details.atkMin[0] +
+                              this.props.details.weapon
                           : this.props.details.atkMin[0]
                       : "Bane"}
                   </a>
@@ -857,7 +859,8 @@ class HeroMenuStats extends React.Component {
                             ? this.props.details.atkMin[1] +
                               this.props.details.weapon +
                               3
-                            : this.props.details.weapon
+                            : this.props.details.atkMin[1] +
+                              this.props.details.weapon
                           : this.props.details.atkMin[1]
                       : "Neutral"}
                   </a>
@@ -882,7 +885,8 @@ class HeroMenuStats extends React.Component {
                             ? this.props.details.atkMin[2] +
                               this.props.details.weapon +
                               3
-                            : this.props.details.weapon
+                            : this.props.details.atkMin[2] +
+                              this.props.details.weapon
                           : this.props.details.atkMin[2]
                       : "Boon"}
                   </a>

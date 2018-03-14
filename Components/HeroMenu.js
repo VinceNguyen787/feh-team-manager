@@ -8,6 +8,12 @@ class HeroMenu extends React.Component {
     heroes: { heroes }
   };
 
+  /*tempClick = () => {
+    for (let hero of this.state.heroes.heroes) {
+      console.log(hero.name);
+    }
+  };*/
+
   fillInStats = details => {
     this.props.fillInStats(details);
     this.checkDeselect();
@@ -29,7 +35,7 @@ class HeroMenu extends React.Component {
         {/* Load Weapon Icon Bar */}
         <IconsBar />
         {/* Load Heroes onto Menu */}
-        <div className="hero-container">
+        <div className="hero-container" onClick={this.tempClick}>
           {Object.keys(heroes).map(key => (
             <Hero
               ref={key}
