@@ -31,20 +31,8 @@ class HeroMenu extends React.Component {
     for (let i = 0; i < allHeroes.length; i++) {
       let currHero = allHeroes[i];
 
-      /*for (let j = 0; j < currHero.weaponArray.length; j++) {
-        if (currHero.weaponArray[j] === 1) {
-          weaponIndex = j;
-          break;
-        }
-      }*/
       weaponIndex = currHero.weaponIndex;
-
-      for (let j = 0; j < currHero.movementArray.length; j++) {
-        if (currHero.movementArray[j] === 1) {
-          movementIndex = j;
-          break;
-        }
-      }
+      movementIndex = currHero.movementIndex;
 
       if (
         weaponArray[weaponIndex] === 1 &&

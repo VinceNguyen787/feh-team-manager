@@ -74,8 +74,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [5, 6, 7],
     resMin: [4, 5, 6],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 0,
+    movementIndex: 0
   },
   amelia: {
     name: "Amelia",
@@ -100,8 +100,8 @@ const heroes = {
     spdMin: [7, 8, 9],
     defMin: [8, 9, 10],
     resMin: [3, 4, 5],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 0, 1]
+    weaponIndex: 2,
+    movementIndex: 3
   },
   anna: {
     name: "Anna",
@@ -126,8 +126,8 @@ const heroes = {
     spdMin: [10, 10, 10],
     defMin: [5, 5, 5],
     resMin: [6, 6, 6],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 2,
+    movementIndex: 0
   },
   arden: {
     name: "Arden",
@@ -152,8 +152,8 @@ const heroes = {
     spdMin: [3, 3, 3],
     defMin: [13, 13, 13],
     resMin: [3, 3, 3],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 0, 1]
+    weaponIndex: 0,
+    movementIndex: 3
   },
   arthur: {
     name: "Arthur",
@@ -178,8 +178,8 @@ const heroes = {
     spdMin: [6, 7, 8],
     defMin: [7, 8, 9],
     resMin: [4, 5, 6],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 2,
+    movementIndex: 0
   },
   arvis: {
     name: "Arvis",
@@ -204,8 +204,8 @@ const heroes = {
     spdMin: [7, 7, 7],
     defMin: [4, 4, 4],
     resMin: [7, 7, 7],
-    weaponArray: [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 3,
+    movementIndex: 0
   },
   athena: {
     name: "Athena",
@@ -230,8 +230,8 @@ const heroes = {
     spdMin: [9, 10, 11],
     defMin: [7, 8, 9],
     resMin: [4, 5, 6],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 0,
+    movementIndex: 0
   },
   ayra: {
     name: "Ayra",
@@ -257,8 +257,8 @@ const heroes = {
     spdMin: [10, 11, 12],
     defMin: [6, 7, 8],
     resMin: [3, 4, 5],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 0,
+    movementIndex: 0
   },
   azama: {
     name: "Azama",
@@ -283,8 +283,8 @@ const heroes = {
     spdMin: [6, 7, 8],
     defMin: [7, 8, 9],
     resMin: [5, 6, 7],
-    weaponArray: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 8,
+    movementIndex: 0
   },
   azura: {
     name: "Azura",
@@ -309,8 +309,8 @@ const heroes = {
     spdMin: [6, 7, 8],
     defMin: [3, 4, 5],
     resMin: [5, 6, 7],
-    weaponArray: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 1,
+    movementIndex: 0
   },
   azura_ny: {
     name: "Azura",
@@ -335,8 +335,8 @@ const heroes = {
     spdMin: [8, 9, 10],
     defMin: [4, 5, 6],
     resMin: [3, 4, 5],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 2,
+    movementIndex: 2
   },
   azura_pa: {
     name: "Azura",
@@ -361,8 +361,8 @@ const heroes = {
     spdMin: [7, 8, 9],
     defMin: [2, 3, 4],
     resMin: [5, 6, 7],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 2,
+    movementIndex: 0
   },
   barst: {
     name: "Barst",
@@ -387,8 +387,8 @@ const heroes = {
     spdMin: [7, 8, 9],
     defMin: [5, 6, 7],
     resMin: [3, 4, 5],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 2,
+    movementIndex: 0
   },
   bartre: {
     name: "Bartre",
@@ -413,8 +413,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [6, 7, 8],
     resMin: [2, 3, 4],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 2,
+    movementIndex: 0
   },
   berkut: {
     name: "Berkut",
@@ -439,8 +439,8 @@ const heroes = {
     spdMin: [5, 5, 5],
     defMin: [7, 7, 7],
     resMin: [7, 7, 7],
-    weaponArray: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 1, 0, 0]
+    weaponIndex: 1,
+    movementIndex: 1
   },
   beruka: {
     name: "Beruka",
@@ -465,8 +465,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [8, 9, 10],
     resMin: [4, 5, 6],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 2,
+    movementIndex: 2
   },
   blackKnight: {
     name: "Black Knight",
@@ -491,8 +491,8 @@ const heroes = {
     spdMin: [8, 8, 8],
     defMin: [9, 9, 9],
     resMin: [5, 5, 5],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 0, 1]
+    weaponIndex: 0,
+    movementIndex: 3
   },
   boey: {
     name: "Boey",
@@ -517,8 +517,8 @@ const heroes = {
     spdMin: [4, 5, 6],
     defMin: [7, 8, 9],
     resMin: [4, 5, 6],
-    weaponArray: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 5,
+    movementIndex: 0
   },
   caeda: {
     name: "Caeda",
@@ -543,8 +543,8 @@ const heroes = {
     spdMin: [8, 9, 10],
     defMin: [4, 5, 6],
     resMin: [9, 10, 11],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 0,
+    movementIndex: 2
   },
   caeda_bb: {
     name: "Caeda",
@@ -569,8 +569,8 @@ const heroes = {
     spdMin: [8, 9, 10],
     defMin: [3, 4, 5],
     resMin: [7, 8, 9],
-    weaponArray: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 4,
+    movementIndex: 0
   },
   cain: {
     name: "Cain",
@@ -595,8 +595,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [7, 8, 9],
     resMin: [5, 6, 7],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 1, 0, 0]
+    weaponIndex: 0,
+    movementIndex: 1
   },
   camilla: {
     name: "Camilla",
@@ -621,8 +621,8 @@ const heroes = {
     spdMin: [7, 8, 9],
     defMin: [5, 6, 7],
     resMin: [6, 7, 8],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 2,
+    movementIndex: 2
   },
   camilla_ny: {
     name: "Camilla",
@@ -647,8 +647,8 @@ const heroes = {
     spdMin: [8, 9, 10],
     defMin: [6, 7, 8],
     resMin: [3, 4, 5],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 0,
+    movementIndex: 2
   },
   camilla_sf: {
     name: "Camilla",
@@ -673,8 +673,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [7, 8, 9],
     resMin: [3, 4, 5],
-    weaponArray: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 5,
+    movementIndex: 2
   },
   camus: {
     name: "Camus",
@@ -699,8 +699,8 @@ const heroes = {
     spdMin: [9, 9, 9],
     defMin: [7, 7, 7],
     resMin: [4, 4, 4],
-    weaponArray: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 1, 0, 0]
+    weaponIndex: 1,
+    movementIndex: 1
   },
   catria: {
     name: "Catria",
@@ -725,8 +725,8 @@ const heroes = {
     spdMin: [9, 10, 11],
     defMin: [6, 7, 8],
     resMin: [5, 6, 7],
-    weaponArray: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 1,
+    movementIndex: 2
   },
   cecilia: {
     name: "Cecilia",
@@ -751,8 +751,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [4, 5, 6],
     resMin: [6, 7, 8],
-    weaponArray: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    movementArray: [0, 1, 0, 0]
+    weaponIndex: 5,
+    movementIndex: 1
   },
   celica: {
     name: "Celica",
@@ -777,8 +777,8 @@ const heroes = {
     spdMin: [6, 7, 8],
     defMin: [4, 5, 6],
     resMin: [6, 7, 8],
-    weaponArray: [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 3,
+    movementIndex: 0
   },
   charlotte_bb: {
     name: "Charlotte",
@@ -803,8 +803,8 @@ const heroes = {
     spdMin: [7, 8, 9],
     defMin: [4, 5, 6],
     resMin: [3, 4, 5],
-    weaponArray: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 1,
+    movementIndex: 0
   },
   cherche: {
     name: "Cherche",
@@ -829,8 +829,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [7, 8, 9],
     resMin: [2, 3, 4],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 2,
+    movementIndex: 2
   },
   chrom: {
     name: "Chrom",
@@ -855,8 +855,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [6, 7, 8],
     resMin: [3, 4, 5],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 0,
+    movementIndex: 0
   },
   chrom_sf: {
     name: "Chrom",
@@ -881,8 +881,8 @@ const heroes = {
     spdMin: [7, 8, 9],
     defMin: [5, 6, 7],
     resMin: [4, 5, 6],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [1, 0, 0, 0]
+    weaponIndex: 2,
+    movementIndex: 0
   },
   chrom_bk: {
     name: "Chrom",
@@ -908,8 +908,8 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [7, 8, 9],
     resMin: [3, 4, 5],
-    weaponArray: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 1, 0, 0]
+    weaponIndex: 0,
+    movementIndex: 1
   },
   chrom_we: {
     name: "Chrom",
@@ -934,8 +934,8 @@ const heroes = {
     spdMin: [3, 4, 5],
     defMin: [8, 9, 10],
     resMin: [4, 5, 6],
-    weaponArray: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 0, 1]
+    weaponIndex: 2,
+    movementIndex: 3
   },
   clair: {
     name: "Clair",
@@ -960,8 +960,8 @@ const heroes = {
     spdMin: [7, 8, 9],
     defMin: [4, 5, 6],
     resMin: [8, 9, 10],
-    weaponArray: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    movementArray: [0, 0, 1, 0]
+    weaponIndex: 1,
+    movementIndex: 2
   },
 
   /* 
