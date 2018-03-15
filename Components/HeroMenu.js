@@ -22,8 +22,6 @@ class HeroMenu extends React.Component {
   filterHeroes = (weaponArray, movementArray) => {
     let allHeroes;
     let filteredHeroes = [];
-    let weaponIndex = 0;
-    let movementIndex = 0;
 
     // Populate heroes array with all heroes
     allHeroes = Object.keys(heroes).map(key => heroes[key]);
@@ -31,12 +29,9 @@ class HeroMenu extends React.Component {
     for (let i = 0; i < allHeroes.length; i++) {
       let currHero = allHeroes[i];
 
-      weaponIndex = currHero.weaponIndex;
-      movementIndex = currHero.movementIndex;
-
       if (
-        weaponArray[weaponIndex] === 1 &&
-        movementArray[movementIndex] === 1
+        weaponArray[currHero.weaponIndex] === 1 &&
+        movementArray[currHero.movementIndex] === 1
       ) {
         filteredHeroes.push(currHero);
       }
