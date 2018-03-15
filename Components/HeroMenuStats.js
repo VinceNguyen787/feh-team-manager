@@ -50,41 +50,62 @@ class HeroMenuStats extends React.Component {
     if (this.state.maxLvl) {
       this.setState({
         hp:
-          details.hp[1] + (this.state.equipped ? (details.hpBonus ? 3 : 0) : 0),
+          details.hp[1] +
+          (this.state.equipped
+            ? details.hpBonus ? details.bonusValueHp : 0
+            : 0),
         atk:
           details.atk[1] +
           (this.state.equipped
-            ? details.atkBonus ? details.weapon + 3 : details.weapon
+            ? details.atkBonus
+              ? details.weapon + details.bonusValueAtk
+              : details.weapon
             : 0),
         spd:
           details.spd[1] +
-          (this.state.equipped ? (details.spdBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? details.spdBonus ? details.bonusValueSpd : 0
+            : 0),
         def:
           details.def[1] +
-          (this.state.equipped ? (details.defBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? details.defBonus ? details.bonusValueDef : 0
+            : 0),
         res:
           details.res[1] +
-          (this.state.equipped ? (details.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? details.resBonus ? details.bonusValueRes : 0
+            : 0)
       });
     } else {
       this.setState({
         hp:
           details.hpMin[1] +
-          (this.state.equipped ? (details.hpBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? details.hpBonus ? details.bonusValueHp : 0
+            : 0),
         atk:
           details.atkMin[1] +
           (this.state.equipped
-            ? details.atkBonus ? details.weapon + 3 : details.weapon
+            ? details.atkBonus
+              ? details.weapon + details.bonusValueAtk
+              : details.weapon
             : 0),
         spd:
           details.spdMin[1] +
-          (this.state.equipped ? (details.spdBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? details.spdBonus ? details.bonusValueSpd : 0
+            : 0),
         def:
           details.defMin[1] +
-          (this.state.equipped ? (details.defBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? details.defBonus ? details.bonusValueDef : 0
+            : 0),
         res:
           details.resMin[1] +
-          (this.state.equipped ? (details.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? details.resBonus ? details.bonusValueRes : 0
+            : 0)
       });
     }
     this.setState({
@@ -118,9 +139,9 @@ class HeroMenuStats extends React.Component {
       currHp = this.state.hp;
 
       if (this.state.equipped) {
-        currHp = currHp - 3;
+        currHp = currHp - this.props.details.bonusValueHp;
       } else {
-        currHp = currHp + 3;
+        currHp = currHp + this.props.details.bonusValueHp;
       }
       this.setState({ hp: currHp });
     }
@@ -133,12 +154,12 @@ class HeroMenuStats extends React.Component {
       if (this.state.equipped) {
         currAtk = currAtk - this.props.details.weapon;
         if (this.state.atkBonus) {
-          currAtk = currAtk - 3;
+          currAtk = currAtk - this.props.details.bonusValueAtk;
         }
       } else {
         currAtk = currAtk + this.props.details.weapon;
         if (this.state.atkBonus) {
-          currAtk = currAtk + 3;
+          currAtk = currAtk + this.props.details.bonusValueAtk;
         }
       }
     }
@@ -150,9 +171,9 @@ class HeroMenuStats extends React.Component {
       currSpd = this.state.spd;
 
       if (this.state.equipped) {
-        currSpd = currSpd - 3;
+        currSpd = currSpd - this.props.details.bonusValueSpd;
       } else {
-        currSpd = currSpd + 3;
+        currSpd = currSpd + this.props.details.bonusValueSpd;
       }
       this.setState({ spd: currSpd });
     }
@@ -163,9 +184,9 @@ class HeroMenuStats extends React.Component {
       currDef = this.state.def;
 
       if (this.state.equipped) {
-        currDef = currDef - 3;
+        currDef = currDef - this.props.details.bonusValueDef;
       } else {
-        currDef = currDef + 3;
+        currDef = currDef + this.props.details.bonusValueDef;
       }
       this.setState({ def: currDef });
     }
@@ -176,9 +197,9 @@ class HeroMenuStats extends React.Component {
       currRes = this.state.res;
 
       if (this.state.equipped) {
-        currRes = currRes - 3;
+        currRes = currRes - this.props.details.bonusValueRes;
       } else {
-        currRes = currRes + 3;
+        currRes = currRes + this.props.details.bonusValueRes;
       }
       this.setState({ res: currRes });
     }
@@ -202,23 +223,31 @@ class HeroMenuStats extends React.Component {
 
         hp:
           this.props.details.hp[1] +
-          (this.state.equipped ? (this.props.details.hpBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? this.props.details.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0),
         atk:
           this.props.details.atk[1] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0),
         spd:
           this.props.details.spd[1] +
-          (this.state.equipped ? (this.props.details.spdBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? this.props.details.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0),
         def:
           this.props.details.def[1] +
-          (this.state.equipped ? (this.props.details.defBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? this.props.details.defBonus ? this.props.details.bonusValueDef : 0
+            : 0),
         res:
           this.props.details.res[1] +
-          (this.state.equipped ? (this.props.details.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.props.details.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     }
   };
@@ -242,23 +271,31 @@ class HeroMenuStats extends React.Component {
 
         hp:
           this.props.details.hpMin[1] +
-          (this.state.equipped ? (this.props.details.hpBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? this.props.details.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0),
         atk:
           this.props.details.atkMin[1] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0),
         spd:
           this.props.details.spdMin[1] +
-          (this.state.equipped ? (this.props.details.spdBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? this.props.details.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0),
         def:
           this.props.details.defMin[1] +
-          (this.state.equipped ? (this.props.details.defBonus ? 3 : 0) : 0),
+          (this.state.equipped
+            ? this.props.details.defBonus ? this.props.details.bonusValueDef : 0
+            : 0),
         res:
           this.props.details.resMin[1] +
-          (this.state.equipped ? (this.props.details.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.props.details.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     }
   };
@@ -269,13 +306,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         hp:
           this.props.details.hp[0] +
-          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0)
       });
     } else {
       this.setState({
         hp:
           this.props.details.hpMin[0] +
-          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0)
       });
     }
 
@@ -290,13 +331,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         hp:
           this.props.details.hp[1] +
-          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0)
       });
     } else {
       this.setState({
         hp:
           this.props.details.hpMin[1] +
-          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0)
       });
     }
 
@@ -311,13 +356,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         hp:
           this.props.details.hp[2] +
-          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0)
       });
     } else {
       this.setState({
         hp:
           this.props.details.hpMin[2] +
-          (this.state.equipped ? (this.state.hpBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.hpBonus ? this.props.details.bonusValueHp : 0
+            : 0)
       });
     }
 
@@ -335,7 +384,7 @@ class HeroMenuStats extends React.Component {
           this.props.details.atk[0] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0)
       });
@@ -345,7 +394,7 @@ class HeroMenuStats extends React.Component {
           this.props.details.atkMin[0] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0)
       });
@@ -364,7 +413,7 @@ class HeroMenuStats extends React.Component {
           this.props.details.atk[1] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0)
       });
@@ -374,7 +423,7 @@ class HeroMenuStats extends React.Component {
           this.props.details.atkMin[1] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0)
       });
@@ -393,7 +442,7 @@ class HeroMenuStats extends React.Component {
           this.props.details.atk[2] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0)
       });
@@ -403,7 +452,7 @@ class HeroMenuStats extends React.Component {
           this.props.details.atkMin[2] +
           (this.state.equipped
             ? this.props.details.atkBonus
-              ? this.props.details.weapon + 3
+              ? this.props.details.weapon + this.props.details.bonusValueAtk
               : this.props.details.weapon
             : 0)
       });
@@ -421,13 +470,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         spd:
           this.props.details.spd[0] +
-          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0)
       });
     } else {
       this.setState({
         spd:
           this.props.details.spdMin[0] +
-          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0)
       });
     }
 
@@ -442,13 +495,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         spd:
           this.props.details.spd[1] +
-          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0)
       });
     } else {
       this.setState({
         spd:
           this.props.details.spdMin[1] +
-          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0)
       });
     }
 
@@ -463,13 +520,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         spd:
           this.props.details.spd[2] +
-          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0)
       });
     } else {
       this.setState({
         spd:
           this.props.details.spdMin[2] +
-          (this.state.equipped ? (this.state.spdBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.spdBonus ? this.props.details.bonusValueSpd : 0
+            : 0)
       });
     }
 
@@ -485,13 +546,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         def:
           this.props.details.def[0] +
-          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.defBonus ? this.props.details.bonusValueDef : 0
+            : 0)
       });
     } else {
       this.setState({
         def:
           this.props.details.defMin[0] +
-          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.defBonus ? this.props.details.bonusValueDef : 0
+            : 0)
       });
     }
 
@@ -506,13 +571,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         def:
           this.props.details.def[1] +
-          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.defBonus ? this.props.details.bonusValueDef : 0
+            : 0)
       });
     } else {
       this.setState({
         def:
           this.props.details.defMin[1] +
-          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.defBonus ? this.props.details.bonusValueDef : 0
+            : 0)
       });
     }
 
@@ -527,13 +596,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         def:
           this.props.details.def[2] +
-          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.defBonus ? this.props.details.bonusValueDef : 0
+            : 0)
       });
     } else {
       this.setState({
         def:
           this.props.details.defMin[2] +
-          (this.state.equipped ? (this.state.defBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.defBonus ? this.props.details.bonusValueDef : 0
+            : 0)
       });
     }
 
@@ -549,13 +622,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         res:
           this.props.details.res[0] +
-          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     } else {
       this.setState({
         res:
           this.props.details.resMin[0] +
-          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     }
 
@@ -570,13 +647,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         res:
           this.props.details.res[1] +
-          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     } else {
       this.setState({
         res:
           this.props.details.resMin[1] +
-          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     }
 
@@ -591,13 +672,17 @@ class HeroMenuStats extends React.Component {
       this.setState({
         res:
           this.props.details.res[2] +
-          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     } else {
       this.setState({
         res:
           this.props.details.resMin[2] +
-          (this.state.equipped ? (this.state.resBonus ? 3 : 0) : 0)
+          (this.state.equipped
+            ? this.state.resBonus ? this.props.details.bonusValueRes : 0
+            : 0)
       });
     }
 
@@ -691,12 +776,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.hpBonus
-                            ? this.props.details.hp[0] + 3
+                            ? this.props.details.hp[0] +
+                              this.props.details.bonusValueHp
                             : this.props.details.hp[0]
                           : this.props.details.hp[0]
                         : this.state.equipped
                           ? this.props.details.hpBonus
-                            ? this.props.details.hpMin[0] + 3
+                            ? this.props.details.hpMin[0] +
+                              this.props.details.bonusValueHp
                             : this.props.details.hpMin[0]
                           : this.props.details.hpMin[0]
                       : "Bane"}
@@ -711,12 +798,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.hpBonus
-                            ? this.props.details.hp[1] + 3
+                            ? this.props.details.hp[1] +
+                              this.props.details.bonusValueHp
                             : this.props.details.hp[1]
                           : this.props.details.hp[1]
                         : this.state.equipped
                           ? this.props.details.hpBonus
-                            ? this.props.details.hpMin[1] + 3
+                            ? this.props.details.hpMin[1] +
+                              this.props.details.bonusValueHp
                             : this.props.details.hpMin[1]
                           : this.props.details.hpMin[1]
                       : "Neutral"}
@@ -731,12 +820,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.hpBonus
-                            ? this.props.details.hp[2] + 3
+                            ? this.props.details.hp[2] +
+                              this.props.details.bonusValueHp
                             : this.props.details.hp[2]
                           : this.props.details.hp[2]
                         : this.state.equipped
                           ? this.props.details.hpBonus
-                            ? this.props.details.hpMin[2] + 3
+                            ? this.props.details.hpMin[2] +
+                              this.props.details.bonusValueHp
                             : this.props.details.hpMin[2]
                           : this.props.details.hpMin[2]
                       : "Boon"}
@@ -824,7 +915,7 @@ class HeroMenuStats extends React.Component {
                           ? this.props.details.atkBonus
                             ? this.props.details.atk[0] +
                               this.props.details.weapon +
-                              3
+                              this.props.details.bonusValueAtk
                             : this.props.details.atk[0] +
                               this.props.details.weapon
                           : this.props.details.atk[0]
@@ -832,7 +923,7 @@ class HeroMenuStats extends React.Component {
                           ? this.props.details.atkBonus
                             ? this.props.details.atkMin[0] +
                               this.props.details.weapon +
-                              3
+                              this.props.details.bonusValueAtk
                             : this.props.details.atkMin[0] +
                               this.props.details.weapon
                           : this.props.details.atkMin[0]
@@ -850,7 +941,7 @@ class HeroMenuStats extends React.Component {
                           ? this.props.details.atkBonus
                             ? this.props.details.atk[1] +
                               this.props.details.weapon +
-                              3
+                              this.props.details.bonusValueAtk
                             : this.props.details.atk[1] +
                               this.props.details.weapon
                           : this.props.details.atk[1]
@@ -858,7 +949,7 @@ class HeroMenuStats extends React.Component {
                           ? this.props.details.atkBonus
                             ? this.props.details.atkMin[1] +
                               this.props.details.weapon +
-                              3
+                              this.props.details.bonusValueAtk
                             : this.props.details.atkMin[1] +
                               this.props.details.weapon
                           : this.props.details.atkMin[1]
@@ -876,7 +967,7 @@ class HeroMenuStats extends React.Component {
                           ? this.props.details.atkBonus
                             ? this.props.details.atk[2] +
                               this.props.details.weapon +
-                              3
+                              this.props.details.bonusValueAtk
                             : this.props.details.atk[2] +
                               this.props.details.weapon
                           : this.props.details.atk[2]
@@ -884,7 +975,7 @@ class HeroMenuStats extends React.Component {
                           ? this.props.details.atkBonus
                             ? this.props.details.atkMin[2] +
                               this.props.details.weapon +
-                              3
+                              this.props.details.bonusValueAtk
                             : this.props.details.atkMin[2] +
                               this.props.details.weapon
                           : this.props.details.atkMin[2]
@@ -927,12 +1018,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.spdBonus
-                            ? this.props.details.spd[0] + 3
+                            ? this.props.details.spd[0] +
+                              this.props.details.bonusValueSpd
                             : this.props.details.spd[0]
                           : this.props.details.spd[0]
                         : this.state.equipped
                           ? this.props.details.spdBonus
-                            ? this.props.details.spdMin[0] + 3
+                            ? this.props.details.spdMin[0] +
+                              this.props.details.bonusValueSpd
                             : this.props.details.spdMin[0]
                           : this.props.details.spdMin[0]
                       : "Bane"}
@@ -947,12 +1040,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.spdBonus
-                            ? this.props.details.spd[1] + 3
+                            ? this.props.details.spd[1] +
+                              this.props.details.bonusValueSpd
                             : this.props.details.spd[1]
                           : this.props.details.spd[1]
                         : this.state.equipped
                           ? this.props.details.spdBonus
-                            ? this.props.details.spdMin[1] + 3
+                            ? this.props.details.spdMin[1] +
+                              this.props.details.bonusValueSpd
                             : this.props.details.spdMin[1]
                           : this.props.details.spdMin[1]
                       : "Neutral"}
@@ -967,12 +1062,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.spdBonus
-                            ? this.props.details.spd[2] + 3
+                            ? this.props.details.spd[2] +
+                              this.props.details.bonusValueSpd
                             : this.props.details.spd[2]
                           : this.props.details.spd[2]
                         : this.state.equipped
                           ? this.props.details.spdBonus
-                            ? this.props.details.spdMin[2] + 3
+                            ? this.props.details.spdMin[2] +
+                              this.props.details.bonusValueSpd
                             : this.props.details.spdMin[2]
                           : this.props.details.spdMin[2]
                       : "Boon"}
@@ -1017,12 +1114,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.defBonus
-                            ? this.props.details.def[0] + 3
+                            ? this.props.details.def[0] +
+                              this.props.details.bonusValueDef
                             : this.props.details.def[0]
                           : this.props.details.def[0]
                         : this.state.equipped
                           ? this.props.details.defBonus
-                            ? this.props.details.defMin[0] + 3
+                            ? this.props.details.defMin[0] +
+                              this.props.details.bonusValueDef
                             : this.props.details.defMin[0]
                           : this.props.details.defMin[0]
                       : "Bane"}
@@ -1037,12 +1136,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.defBonus
-                            ? this.props.details.def[1] + 3
+                            ? this.props.details.def[1] +
+                              this.props.details.bonusValueDef
                             : this.props.details.def[1]
                           : this.props.details.def[1]
                         : this.state.equipped
                           ? this.props.details.defBonus
-                            ? this.props.details.defMin[1] + 3
+                            ? this.props.details.defMin[1] +
+                              this.props.details.bonusValueDef
                             : this.props.details.defMin[1]
                           : this.props.details.defMin[1]
                       : "Neutral"}
@@ -1057,12 +1158,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.defBonus
-                            ? this.props.details.def[2] + 3
+                            ? this.props.details.def[2] +
+                              this.props.details.bonusValueDef
                             : this.props.details.def[2]
                           : this.props.details.def[2]
                         : this.state.equipped
                           ? this.props.details.defBonus
-                            ? this.props.details.defMin[2] + 3
+                            ? this.props.details.defMin[2] +
+                              this.props.details.bonusValueDef
                             : this.props.details.defMin[2]
                           : this.props.details.defMin[2]
                       : "Boon"}
@@ -1104,12 +1207,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.resBonus
-                            ? this.props.details.res[0] + 3
+                            ? this.props.details.res[0] +
+                              this.props.details.bonusValueRes
                             : this.props.details.res[0]
                           : this.props.details.res[0]
                         : this.state.equipped
                           ? this.props.details.resBonus
-                            ? this.props.details.resMin[0] + 3
+                            ? this.props.details.resMin[0] +
+                              this.props.details.bonusValueRes
                             : this.props.details.resMin[0]
                           : this.props.details.resMin[0]
                       : "Bane"}
@@ -1124,12 +1229,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.resBonus
-                            ? this.props.details.res[1] + 3
+                            ? this.props.details.res[1] +
+                              this.props.details.bonusValueRes
                             : this.props.details.res[1]
                           : this.props.details.res[1]
                         : this.state.equipped
                           ? this.props.details.resBonus
-                            ? this.props.details.resMin[1] + 3
+                            ? this.props.details.resMin[1] +
+                              this.props.details.bonusValueRes
                             : this.props.details.resMin[1]
                           : this.props.details.resMin[1]
                       : "Neutral"}
@@ -1144,12 +1251,14 @@ class HeroMenuStats extends React.Component {
                       ? this.state.maxLvl
                         ? this.state.equipped
                           ? this.props.details.resBonus
-                            ? this.props.details.res[2] + 3
+                            ? this.props.details.res[2] +
+                              this.props.details.bonusValueRes
                             : this.props.details.res[2]
                           : this.props.details.res[2]
                         : this.state.equipped
                           ? this.props.details.resBonus
-                            ? this.props.details.resMin[2] + 3
+                            ? this.props.details.resMin[2] +
+                              this.props.details.bonusValueRes
                             : this.props.details.resMin[2]
                           : this.props.details.resMin[2]
                       : "Boon"}
