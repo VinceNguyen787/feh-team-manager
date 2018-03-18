@@ -35,7 +35,14 @@ class HeroMenuStats extends React.Component {
     atkBonus: false,
     spdBonus: false,
     defBonus: false,
-    resBonus: false
+    resBonus: false,
+
+    merges: 0,
+    hpMergeBonus: 0,
+    atkMergeBonus: 0,
+    spdMergeBonus: 0,
+    defMergeBonus: 0,
+    resMergeBonus: 0,
   };
 
   setNameEpithet = (name, epithet) => {
@@ -45,7 +52,7 @@ class HeroMenuStats extends React.Component {
     });
   };
 
-  /* Set Stats */
+  // Set Stats
   setStats = details => {
     if (this.state.maxLvl) {
       this.setState({
@@ -124,16 +131,23 @@ class HeroMenuStats extends React.Component {
       atkBonus: details.atkBonus ? details.atkBonus : false,
       spdBonus: details.spdBonus ? details.spdBonus : false,
       defBonus: details.defBonus ? details.defBonus : false,
-      resBonus: details.resBonus ? details.resBonus : false
+      resBonus: details.resBonus ? details.resBonus : false,
+
+      merges: 0,
+      hpMergeBonus: 0,
+      atkMergeBonus: 0,
+      spdMergeBonus: 0,
+      defMergeBonus: 0,
+      resMergeBonus: 0
     });
   };
 
-  /* Weapon Check Box Event Handler */
+  // Weapon Check Box Event Handler
   handleWeaponClick = () => {
     /* Toggle Equipped Status */
     this.setState({ equipped: this.state.equipped ? false : true });
 
-    /* Update HP Values if HP Bonus */
+    // Update HP Values if HP Bonus
     let currHp = 0;
     if (Number.isInteger(this.state.hp) && this.state.hpBonus) {
       currHp = this.state.hp;
@@ -146,7 +160,7 @@ class HeroMenuStats extends React.Component {
       this.setState({ hp: currHp });
     }
 
-    /* Update Attack Values for Weapon and/or Atk Bonus */
+    // Update Attack Values for Weapon and/or Atk Bonus
     let currAtk = 0;
     if (Number.isInteger(this.state.atk)) {
       currAtk = this.state.atk;
@@ -165,7 +179,7 @@ class HeroMenuStats extends React.Component {
     }
     this.setState({ atk: currAtk });
 
-    /* Update Speed Values if Spd Bonus */
+    // Update Speed Values if Spd Bonus
     let currSpd = 0;
     if (Number.isInteger(this.state.spd) && this.state.spdBonus) {
       currSpd = this.state.spd;
@@ -178,7 +192,7 @@ class HeroMenuStats extends React.Component {
       this.setState({ spd: currSpd });
     }
 
-    /* Update Def Values if Def Bonus */
+    // Update Def Values if Def Bonus
     let currDef = 0;
     if (Number.isInteger(this.state.def) && this.state.defBonus) {
       currDef = this.state.def;
@@ -191,7 +205,7 @@ class HeroMenuStats extends React.Component {
       this.setState({ def: currDef });
     }
 
-    /* Update Res Values if Res Bonus */
+    // Update Res Values if Res Bonus
     let currRes = 0;
     if (Number.isInteger(this.state.res) && this.state.resBonus) {
       currRes = this.state.res;
@@ -205,7 +219,7 @@ class HeroMenuStats extends React.Component {
     }
   };
 
-  /* Handle Level 40 Radio Button Click */
+  // Handle Level 40 Radio Button Click
   handleMaxClick = () => {
     if (this.props.details.name) {
       this.setState({
@@ -252,7 +266,7 @@ class HeroMenuStats extends React.Component {
     }
   };
 
-  /* Handle Level 1 Radio Button Click */
+  // Handle Level 1 Radio Button Click
   handleMinClick = () => {
     this.setState({ maxLvl: false });
 
@@ -300,7 +314,7 @@ class HeroMenuStats extends React.Component {
     }
   };
 
-  /* HP Event Handlers */
+  // HP Event Handlers
   handleHpClickBane = () => {
     if (this.state.maxLvl) {
       this.setState({
@@ -376,7 +390,7 @@ class HeroMenuStats extends React.Component {
     });
   };
 
-  /* Atk Event Handlers */
+  // Atk Event Handlers
   handleAtkClickBane = () => {
     if (this.state.maxLvl) {
       this.setState({
@@ -464,7 +478,7 @@ class HeroMenuStats extends React.Component {
     });
   };
 
-  /* Spd Event Handlers */
+  // Spd Event Handlers
   handleSpdClickBane = () => {
     if (this.state.maxLvl) {
       this.setState({
@@ -540,7 +554,7 @@ class HeroMenuStats extends React.Component {
     });
   };
 
-  /* Def Event Handlers */
+  // Def Event Handlers
   handleDefClickBane = () => {
     if (this.state.maxLvl) {
       this.setState({
@@ -616,7 +630,7 @@ class HeroMenuStats extends React.Component {
     });
   };
 
-  /* Res Event Handlers */
+  // Res Event Handlers
   handleResClickBane = () => {
     if (this.state.maxLvl) {
       this.setState({
@@ -692,6 +706,293 @@ class HeroMenuStats extends React.Component {
     });
   };
 
+  // Rank Highest Stats
+  rankStats = () => {
+    let statArr = [];
+    let rankArr = [];
+    let currHp, currAtk, currSpd, currDef, currRes;
+
+    // Set curr variables to user-selected stats
+    if (this.state.hpBane) {
+      currHp = this.props.details.hpMin[0];
+    } else if (this.state.hpBoon) {
+      currHp = this.props.details.hpMin[2];
+    } else {
+      currHp = this.props.details.hpMin[1];
+    }
+
+    if (this.state.atkBane) {
+      currAtk = this.props.details.atkMin[0];
+    } else if (this.state.atkBoon) {
+      currAtk = this.props.details.atkMin[2];
+    } else {
+      currAtk = this.props.details.atkMin[1];
+    }
+
+    if (this.state.spdBane) {
+      currSpd = this.props.details.spdMin[0];
+    } else if (this.state.spdBoon) {
+      currSpd = this.props.details.spdMin[2];
+    } else {
+      currSpd = this.props.details.spdMin[1];
+    }
+
+    if (this.state.defBane) {
+      currDef = this.props.details.defMin[0];
+    } else if (this.state.defBoon) {
+      currDef = this.props.details.defMin[2];
+    } else {
+      currDef = this.props.details.defMin[1];
+    }
+
+    if (this.state.resBane) {
+      currRes = this.props.details.resMin[0];
+    } else if (this.state.resBoon) {
+      currRes = this.props.details.resMin[2];
+    } else {
+      currRes = this.props.details.resMin[1];
+    }
+
+    // Push all current stats onto stat array
+    statArr.push(currHp);
+    statArr.push(currAtk);
+    statArr.push(currSpd);
+    statArr.push(currDef);
+    statArr.push(currRes);
+
+    // Rank each stat by value (highest first)
+    let highestIndex = 0;
+    let currStatValue = 0;
+
+    /* Create rankArr example: [2 3 0 1 4] means:
+       highest stat is in index 2, which is spd
+       second highest stat is in index 3, which is def, etc */
+    for (let i = 0; i < 5; i++) {
+      highestIndex = 0;
+      currStatValue = statArr[0];
+
+      for (let j = 0; j < 5; j++) {
+        if (currStatValue < statArr[j]) {
+          highestIndex = j;
+          currStatValue = statArr[j];
+        }
+      }
+
+      statArr[highestIndex] = 0;
+      rankArr.push(highestIndex);
+    }
+
+    return rankArr;
+  };
+
+  // Merge Event Handlers
+  handle0MergeClick = () => {
+    this.setState({
+      merges: 0,
+      hpMergeBonus: 0,
+      atkMergeBonus: 0,
+      spdMergeBonus: 0,
+      defMergeBonus: 0,
+      resMergeBonus: 0
+    });
+  };
+
+  handle1MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 1;
+    bonusArr[rankArr[1]] = 1;
+
+    this.setState({
+      merges: 1,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle2MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 1;
+    bonusArr[rankArr[1]] = 1;
+    bonusArr[rankArr[2]] = 1;
+    bonusArr[rankArr[3]] = 1;
+
+    this.setState({
+      merges: 2,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle3MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 2;
+    bonusArr[rankArr[1]] = 1;
+    bonusArr[rankArr[2]] = 1;
+    bonusArr[rankArr[3]] = 1;
+    bonusArr[rankArr[4]] = 1;
+
+    this.setState({
+      merges: 3,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle4MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 2;
+    bonusArr[rankArr[1]] = 2;
+    bonusArr[rankArr[2]] = 2;
+    bonusArr[rankArr[3]] = 1;
+    bonusArr[rankArr[4]] = 1;
+
+    this.setState({
+      merges: 4,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle5MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 2;
+    bonusArr[rankArr[1]] = 2;
+    bonusArr[rankArr[2]] = 2;
+    bonusArr[rankArr[3]] = 2;
+    bonusArr[rankArr[4]] = 2;
+
+    this.setState({
+      merges: 5,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle6MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 3;
+    bonusArr[rankArr[1]] = 3;
+    bonusArr[rankArr[2]] = 2;
+    bonusArr[rankArr[3]] = 2;
+    bonusArr[rankArr[4]] = 2;
+
+    this.setState({
+      merges: 6,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle7MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 3;
+    bonusArr[rankArr[1]] = 3;
+    bonusArr[rankArr[2]] = 3;
+    bonusArr[rankArr[3]] = 3;
+    bonusArr[rankArr[4]] = 2;
+
+    this.setState({
+      merges: 7,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle8MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 4;
+    bonusArr[rankArr[1]] = 3;
+    bonusArr[rankArr[2]] = 3;
+    bonusArr[rankArr[3]] = 3;
+    bonusArr[rankArr[4]] = 3;
+
+    this.setState({
+      merges: 8,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle9MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 4;
+    bonusArr[rankArr[1]] = 4;
+    bonusArr[rankArr[2]] = 4;
+    bonusArr[rankArr[3]] = 3;
+    bonusArr[rankArr[4]] = 3;
+
+    this.setState({
+      merges: 9,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
+  handle10MergeClick = () => {
+    let rankArr = this.rankStats();
+    let bonusArr = [0, 0, 0, 0, 0];
+
+    bonusArr[rankArr[0]] = 4;
+    bonusArr[rankArr[1]] = 4;
+    bonusArr[rankArr[2]] = 4;
+    bonusArr[rankArr[3]] = 4;
+    bonusArr[rankArr[4]] = 4;
+
+    this.setState({
+      merges: 10,
+      hpMergeBonus: bonusArr[0],
+      atkMergeBonus: bonusArr[1],
+      spdMergeBonus: bonusArr[2],
+      defMergeBonus: bonusArr[3],
+      resMergeBonus: bonusArr[4],
+    })
+  };
+
   render() {
     return (
       <div>
@@ -747,7 +1048,7 @@ class HeroMenuStats extends React.Component {
             <font size="5">
               <b> &nbsp;&nbsp;HP: </b>
             </font>
-            <div className="dropdown is-hoverable">
+            <div className={this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"}>
               <div className="dropdown-trigger">
                 <button
                   className={
@@ -758,7 +1059,7 @@ class HeroMenuStats extends React.Component {
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                 >
-                  <span>{this.state.hp ? this.state.hp : "Select"}</span>
+                  <span>{this.state.hp ? this.state.hpMergeBonus + this.state.hp : "Select"}</span>
                   <span className="icon is-small">
                     <i className="fas fa-angle-down" aria-hidden="true" />
                   </span>
@@ -862,8 +1163,124 @@ class HeroMenuStats extends React.Component {
               </label>
             </div>
           </span>
+          {/* Merges Dropdown */}
+          <span className="column is-narrow">
+            <div className="dropdown is-hoverable">
+              <div className="dropdown-trigger">
+                <button
+                  className="button"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu"
+                >
+                  <span>
+                    {this.props.details.name
+                      ? this.state.merges ? "+" + this.state.merges : "+0"
+                      : "Merges"}
+                  </span>
+                  <span className="icon is-small">
+                    <i className="fas fa-angle-down" aria-hidden="true" />
+                  </span>
+                </button>
+              </div>
+              <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                <div className="dropdown-content">
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle0MergeClick : null
+                    }
+                  >
+                    +0
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle1MergeClick : null
+                    }
+                  >
+                    +1
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle2MergeClick : null
+                    }
+                  >
+                    +2
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle3MergeClick : null
+                    }
+                  >
+                    +3
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle4MergeClick : null
+                    }
+                  >
+                    +4
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle5MergeClick : null
+                    }
+                  >
+                    +5
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle6MergeClick : null
+                    }
+                  >
+                    +6
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle7MergeClick : null
+                    }
+                  >
+                    +7
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle8MergeClick : null
+                    }
+                  >
+                    +8
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle9MergeClick : null
+                    }
+                  >
+                    +9
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    onClick={
+                      this.props.details.name ? this.handle10MergeClick : null
+                    }
+                  >
+                    +10
+                  </a>
+                </div>
+                <font color="red" size="1">
+                  NOTE: <br /> Set Boon/Bane BEFORE setting merge level.{" "}
+                </font>
+              </div>
+            </div>
+          </span>
           {/* Weapon Display */}
-          <span className="column is-offset-1">
+          <span className="column">
             <img
               src={misc.weapon_skill.image}
               alt={misc.weapon_skill.name}
@@ -884,7 +1301,7 @@ class HeroMenuStats extends React.Component {
             <font size="5">
               <b> ATK: </b>
             </font>
-            <div className="dropdown is-hoverable">
+            <div className={this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"}>
               <div className="dropdown-trigger">
                 <button
                   className={
@@ -895,7 +1312,7 @@ class HeroMenuStats extends React.Component {
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                 >
-                  <span>{this.state.atk ? this.state.atk : "Select"}</span>
+                  <span>{this.state.atk ? this.state.atkMergeBonus + this.state.atk : "Select"}</span>
                   <span className="icon is-small">
                     <i className="fas fa-angle-down" aria-hidden="true" />
                   </span>
@@ -989,7 +1406,7 @@ class HeroMenuStats extends React.Component {
             <font size="5">
               <b> SPD: </b>
             </font>
-            <div className="dropdown is-hoverable">
+            <div className={this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"}>
               <div className="dropdown-trigger">
                 <button
                   className={
@@ -1000,7 +1417,7 @@ class HeroMenuStats extends React.Component {
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                 >
-                  <span>{this.state.spd ? this.state.spd : "Select"}</span>
+                  <span>{this.state.spd ? this.state.spdMergeBonus + this.state.spd : "Select"}</span>
                   <span className="icon is-small">
                     <i className="fas fa-angle-down" aria-hidden="true" />
                   </span>
@@ -1085,7 +1502,7 @@ class HeroMenuStats extends React.Component {
             <font size="5">
               <b> DEF: </b>
             </font>
-            <div className="dropdown is-hoverable">
+            <div className={this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"}>
               <div className="dropdown-trigger">
                 <button
                   className={
@@ -1096,7 +1513,7 @@ class HeroMenuStats extends React.Component {
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                 >
-                  <span>{this.state.def ? this.state.def : "Select"}</span>
+                  <span>{this.state.def ? this.state.defMergeBonus + this.state.def : "Select"}</span>
                   <span className="icon is-small">
                     <i className="fas fa-angle-down" aria-hidden="true" />
                   </span>
@@ -1178,7 +1595,7 @@ class HeroMenuStats extends React.Component {
             <font size="5">
               <b> RES: </b>
             </font>
-            <div className="dropdown is-hoverable">
+            <div className={this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"}>
               <div className="dropdown-trigger">
                 <button
                   className={
@@ -1189,7 +1606,7 @@ class HeroMenuStats extends React.Component {
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                 >
-                  <span>{this.state.res ? this.state.res : "Select"}</span>
+                  <span>{this.state.res ? this.state.resMergeBonus + this.state.res : "Select"}</span>
                   <span className="icon is-small">
                     <i className="fas fa-angle-down" aria-hidden="true" />
                   </span>

@@ -25,7 +25,7 @@ const heroes = {
     defMin: [7, 8, 9],
     resMin: [5, 6, 7],
     weaponIndex: 1,
-    movementIndeex: 1
+    movementIndex: 1
   },
   alfonse: {
     name: "Alfonse",
