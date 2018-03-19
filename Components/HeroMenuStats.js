@@ -1099,7 +1099,11 @@ class HeroMenuStats extends React.Component {
             </font>
             <div
               className={
-                this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"
+                this.props.details.noVariation
+                  ? "dropdown"
+                  : this.state.merges === 0
+                    ? "dropdown is-hoverable"
+                    : "dropdown"
               }
             >
               <div className="dropdown-trigger">
@@ -1360,7 +1364,11 @@ class HeroMenuStats extends React.Component {
             </font>
             <div
               className={
-                this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"
+                this.props.details.noVariation
+                  ? "dropdown"
+                  : this.state.merges === 0
+                    ? "dropdown is-hoverable"
+                    : "dropdown"
               }
             >
               <div className="dropdown-trigger">
@@ -1473,7 +1481,11 @@ class HeroMenuStats extends React.Component {
             </font>
             <div
               className={
-                this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"
+                this.props.details.noVariation
+                  ? "dropdown"
+                  : this.state.merges === 0
+                    ? "dropdown is-hoverable"
+                    : "dropdown"
               }
             >
               <div className="dropdown-trigger">
@@ -1577,7 +1589,11 @@ class HeroMenuStats extends React.Component {
             </font>
             <div
               className={
-                this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"
+                this.props.details.noVariation
+                  ? "dropdown"
+                  : this.state.merges === 0
+                    ? "dropdown is-hoverable"
+                    : "dropdown"
               }
             >
               <div className="dropdown-trigger">
@@ -1678,7 +1694,11 @@ class HeroMenuStats extends React.Component {
             </font>
             <div
               className={
-                this.state.merges === 0 ? "dropdown is-hoverable" : "dropdown"
+                this.props.details.noVariation
+                  ? "dropdown"
+                  : this.state.merges === 0
+                    ? "dropdown is-hoverable"
+                    : "dropdown"
               }
             >
               <div className="dropdown-trigger">
