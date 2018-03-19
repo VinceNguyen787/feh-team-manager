@@ -1157,7 +1157,7 @@ const heroes = {
     spdMin: [5, 6, 7],
     defMin: [7, 8, 9],
     resMin: [5, 6, 7],
-    weaponIndex: 9,
+    weaponIndex: 10,
     movementIndex: 0
   },
   corrinF_ns: {
@@ -1716,7 +1716,7 @@ const heroes = {
     spdMin: [3, 4, 5],
     defMin: [5, 6, 7],
     resMin: [7, 8, 9],
-    weaponIndex: 9,
+    weaponIndex: 11,
     movementIndex: 0
   },
   faye: {
@@ -3906,7 +3906,7 @@ const heroes = {
     spdMin:[5, 6, 7],
     defMin:[2, 3, 4],
     resMin:[6, 7, 8],
-    weaponIndex: 9,
+    weaponIndex: 11,
     movementIndex: 2
   },
   narcian: {
@@ -4036,7 +4036,7 @@ const heroes = {
     spdMin:[6, 7, 8],
     defMin:[5, 6, 7],
     resMin:[4, 5, 6],
-    weaponIndex: 9,
+    weaponIndex: 10,
     movementIndex: 0
   },
   nino: {
@@ -4088,7 +4088,7 @@ const heroes = {
     spdMin:[4, 5, 6],
     defMin:[5, 6, 7],
     resMin:[4, 5, 6],
-    weaponIndex: 9,
+    weaponIndex: 10,
     movementIndex: 0
   },
   nowi_hw: {
@@ -4643,7 +4643,7 @@ const heroes = {
     spdMin:[6, 7, 8],
     defMin:[8, 9, 10],
     resMin:[4, 5, 6],
-    weaponIndex: 9,
+    weaponIndex: 11,
     movementIndex: 3
   },
   robinM_we: {
