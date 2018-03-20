@@ -1,6 +1,7 @@
 import React from "react";
 import feh from "../feh";
 import misc from "../misc-icons";
+import firebase from "../firebase";
 
 class HeroMenuStats extends React.Component {
   state = {
@@ -899,6 +900,46 @@ class HeroMenuStats extends React.Component {
     });
   };
 
+  handleSubmit = e => {
+    let rankArr = this.rankStats();
+    alert("Hero Added!");
+    e.preventDefault();
+
+    const heroRef = firebase.database().ref("heroes");
+    const hero = {
+      name: this.state.name,
+      epithet: this.state.epithet,
+
+      hp: this.state.hp,
+      atk: this.state.atk,
+      spd: this.state.spd,
+      def: this.state.def,
+      res: this.state.res,
+
+      hpBane: this.state.hpBane,
+      hpBoon: this.state.hpBoon,
+      atkBane: this.state.atkBane,
+      atkBoon: this.state.atkBoon,
+      spdBane: this.state.spdBane,
+      spdBoon: this.state.spdBoon,
+      defBane: this.state.defBane,
+      defBoon: this.state.defBoon,
+      resBane: this.state.resBane,
+      resBoon: this.state.resBoon,
+
+      merges: this.state.merges,
+      hpMergeBonus: this.state.hpMergeBonus,
+      atkMergeBonus: this.state.atkMergeBonus,
+      spdMergeBonus: this.state.spdMergeBonus,
+      defMergeBonus: this.state.defMergeBonus,
+      resMergeBonus: this.state.resMergeBonus,
+
+      rankArr: rankArr
+    };
+
+    heroRef.push(hero);
+  };
+
   // Helper Methods
   getCurrMinStats = () => {
     let currHp, currAtk, currSpd, currDef, currRes;
@@ -1045,760 +1086,780 @@ class HeroMenuStats extends React.Component {
   render() {
     return (
       <div>
-        {/* Row 1 - Icon, Name, and Epithet */}
-        <div className="columns">
-          <span className="column is-narrow">
-            <figure className="image is-96x96">
+        <form onSubmit={this.handleSubmit}>
+          {/* Row 1 - Icon, Name, and Epithet */}
+          <div className="columns">
+            <span className="column is-narrow">
+              <figure className="image is-96x96">
+                <img
+                  src={
+                    this.props.details.image
+                      ? this.props.details.image
+                      : feh.feh.image
+                  }
+                  alt="Portrait"
+                />
+              </figure>
+            </span>
+            <span className="column is-narrow">
+              <font size="8">
+                {this.props.details.name
+                  ? this.props.details.name
+                  : feh.feh.name}
+                &nbsp;-&nbsp;
+              </font>
+              <font size="6">
+                {this.props.details.epithet
+                  ? this.props.details.epithet
+                  : feh.feh.epithet}
+              </font>
+              &nbsp;&nbsp;
               <img
                 src={
-                  this.props.details.image
-                    ? this.props.details.image
-                    : feh.feh.image
+                  this.props.details.typeImg
+                    ? this.props.details.typeImg
+                    : feh.feh.orbImg
                 }
-                alt="Portrait"
+                alt="Type"
+                width="22.5"
               />
-            </figure>
-          </span>
-          <span className="column is-narrow">
-            <font size="8">
-              {this.props.details.name ? this.props.details.name : feh.feh.name}
-              &nbsp;-&nbsp;
-            </font>
-            <font size="6">
-              {this.props.details.epithet
-                ? this.props.details.epithet
-                : feh.feh.epithet}
-            </font>
-            &nbsp;&nbsp;
-            <img
-              src={
-                this.props.details.typeImg
-                  ? this.props.details.typeImg
-                  : feh.feh.orbImg
-              }
-              alt="Type"
-              width="22.5"
-            />
-            &nbsp;&nbsp;
-            <img
-              src={
-                this.props.details.movementImg
-                  ? this.props.details.movementImg
-                  : feh.feh.featherImg
-              }
-              alt="Movement"
-              width="20"
-            />
-          </span>
-        </div>
-        {/* Row 2 - HP and Weapon Equipped Checkox */}
-        <div className="columns">
-          <span className="column is-3 is-narrow">
-            <font size="5">
-              <b> &nbsp;&nbsp;HP: </b>
-            </font>
-            <div
-              className={
-                this.props.details.noVariation
-                  ? "dropdown"
-                  : this.state.merges === 0
-                    ? "dropdown is-hoverable"
-                    : "dropdown"
-              }
-            >
-              <div className="dropdown-trigger">
-                <button
-                  className={
-                    !this.state.hpBane
-                      ? !this.state.hpBoon ? "button" : "button-boon"
-                      : "button-bane"
-                  }
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>
-                    {this.state.hp
-                      ? this.state.hpMergeBonus + this.state.hp
-                      : "Select"}
-                  </span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true" />
-                  </span>
-                </button>
-              </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <a
-                    className="dropdown-item-bane"
-                    onClick={
-                      this.props.details.hp ? this.handleHpClickBane : null
+              &nbsp;&nbsp;
+              <img
+                src={
+                  this.props.details.movementImg
+                    ? this.props.details.movementImg
+                    : feh.feh.featherImg
+                }
+                alt="Movement"
+                width="20"
+              />
+            </span>
+          </div>
+          {/* Row 2 - HP and Weapon Equipped Checkox */}
+          <div className="columns">
+            <span className="column is-3 is-narrow">
+              <font size="5">
+                <b> &nbsp;&nbsp;HP: </b>
+              </font>
+              <div
+                className={
+                  this.props.details.noVariation
+                    ? "dropdown"
+                    : this.state.merges === 0
+                      ? "dropdown is-hoverable"
+                      : "dropdown"
+                }
+              >
+                <div className="dropdown-trigger">
+                  <button
+                    className={
+                      !this.state.hpBane
+                        ? !this.state.hpBoon ? "button" : "button-boon"
+                        : "button-bane"
                     }
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu"
                   >
-                    {this.props.details.hp
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.hpBonus
-                            ? this.props.details.hp[0] +
-                              this.props.details.bonusValueHp
+                    <span>
+                      {this.state.hp
+                        ? this.state.hpMergeBonus + this.state.hp
+                        : "Select"}
+                    </span>
+                    {this.props.details.noVariation ? null : (
+                      <span className="icon is-small">
+                        <i className="fas fa-angle-down" aria-hidden="true" />
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
+                    <a
+                      className="dropdown-item-bane"
+                      onClick={
+                        this.props.details.hp ? this.handleHpClickBane : null
+                      }
+                    >
+                      {this.props.details.hp
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.hpBonus
+                              ? this.props.details.hp[0] +
+                                this.props.details.bonusValueHp
+                              : this.props.details.hp[0]
                             : this.props.details.hp[0]
-                          : this.props.details.hp[0]
-                        : this.state.equipped
-                          ? this.props.details.hpBonus
-                            ? this.props.details.hpMin[0] +
-                              this.props.details.bonusValueHp
+                          : this.state.equipped
+                            ? this.props.details.hpBonus
+                              ? this.props.details.hpMin[0] +
+                                this.props.details.bonusValueHp
+                              : this.props.details.hpMin[0]
                             : this.props.details.hpMin[0]
-                          : this.props.details.hpMin[0]
-                      : "Bane"}
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.hp ? this.handleHpClickNeutral : null
-                    }
-                  >
-                    {this.props.details.hp
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.hpBonus
-                            ? this.props.details.hp[1] +
-                              this.props.details.bonusValueHp
+                        : "Bane"}
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.hp ? this.handleHpClickNeutral : null
+                      }
+                    >
+                      {this.props.details.hp
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.hpBonus
+                              ? this.props.details.hp[1] +
+                                this.props.details.bonusValueHp
+                              : this.props.details.hp[1]
                             : this.props.details.hp[1]
-                          : this.props.details.hp[1]
-                        : this.state.equipped
-                          ? this.props.details.hpBonus
-                            ? this.props.details.hpMin[1] +
-                              this.props.details.bonusValueHp
+                          : this.state.equipped
+                            ? this.props.details.hpBonus
+                              ? this.props.details.hpMin[1] +
+                                this.props.details.bonusValueHp
+                              : this.props.details.hpMin[1]
                             : this.props.details.hpMin[1]
-                          : this.props.details.hpMin[1]
-                      : "Neutral"}
-                  </a>
-                  <a
-                    className="dropdown-item-boon"
-                    onClick={
-                      this.props.details.hp ? this.handleHpClickBoon : null
-                    }
-                  >
-                    {this.props.details.hp
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.hpBonus
-                            ? this.props.details.hp[2] +
-                              this.props.details.bonusValueHp
+                        : "Neutral"}
+                    </a>
+                    <a
+                      className="dropdown-item-boon"
+                      onClick={
+                        this.props.details.hp ? this.handleHpClickBoon : null
+                      }
+                    >
+                      {this.props.details.hp
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.hpBonus
+                              ? this.props.details.hp[2] +
+                                this.props.details.bonusValueHp
+                              : this.props.details.hp[2]
                             : this.props.details.hp[2]
-                          : this.props.details.hp[2]
-                        : this.state.equipped
-                          ? this.props.details.hpBonus
-                            ? this.props.details.hpMin[2] +
-                              this.props.details.bonusValueHp
+                          : this.state.equipped
+                            ? this.props.details.hpBonus
+                              ? this.props.details.hpMin[2] +
+                                this.props.details.bonusValueHp
+                              : this.props.details.hpMin[2]
                             : this.props.details.hpMin[2]
-                          : this.props.details.hpMin[2]
-                      : "Boon"}
-                  </a>
+                        : "Boon"}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </span>
-          {/* Checkbox and Radio Button */}
-          <span className="column is-narrow">
-            <label className="checkbox">
-              <input type="checkbox" onClick={this.handleWeaponClick} /> Weapon
-              Equipped
-            </label>
-            <div className="control">
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="level"
-                  onClick={this.handleMinClick}
-                />
-                &nbsp;Level 1 &nbsp;&nbsp;&nbsp;
+            </span>
+            {/* Checkbox and Radio Button */}
+            <span className="column is-narrow">
+              <label className="checkbox">
+                <input type="checkbox" onClick={this.handleWeaponClick} />{" "}
+                Weapon Equipped
               </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="level"
-                  onClick={this.handleMaxClick}
-                  defaultChecked
-                />
-                &nbsp;Level 40
-              </label>
-            </div>
-          </span>
-          {/* Merges Dropdown */}
-          <span className="column is-narrow">
-            <div className="dropdown is-hoverable">
-              <div className="dropdown-trigger">
-                <button
-                  className="button"
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>
-                    {this.props.details.name
-                      ? this.state.merges ? "+" + this.state.merges : "+0"
-                      : "Merges"}
-                  </span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true" />
-                  </span>
-                </button>
+              <div className="control">
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="level"
+                    onClick={this.handleMinClick}
+                  />
+                  &nbsp;Level 1 &nbsp;&nbsp;&nbsp;
+                </label>
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="level"
+                    onClick={this.handleMaxClick}
+                    defaultChecked
+                  />
+                  &nbsp;Level 40
+                </label>
               </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle0MergeClick : null
-                    }
+            </span>
+            {/* Merges Dropdown */}
+            <span className="column is-narrow">
+              <div className="dropdown is-hoverable">
+                <div className="dropdown-trigger">
+                  <button
+                    className="button"
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu"
                   >
-                    +0
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle1MergeClick : null
-                    }
-                  >
-                    +1
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle2MergeClick : null
-                    }
-                  >
-                    +2
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle3MergeClick : null
-                    }
-                  >
-                    +3
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle4MergeClick : null
-                    }
-                  >
-                    +4
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle5MergeClick : null
-                    }
-                  >
-                    +5
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle6MergeClick : null
-                    }
-                  >
-                    +6
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle7MergeClick : null
-                    }
-                  >
-                    +7
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle8MergeClick : null
-                    }
-                  >
-                    +8
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle9MergeClick : null
-                    }
-                  >
-                    +9
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.name ? this.handle10MergeClick : null
-                    }
-                  >
-                    +10
-                  </a>
+                    <span>
+                      {this.props.details.name
+                        ? this.state.merges ? "+" + this.state.merges : "+0"
+                        : "Merges"}
+                    </span>
+                    <span className="icon is-small">
+                      <i className="fas fa-angle-down" aria-hidden="true" />
+                    </span>
+                  </button>
                 </div>
-                <font color="red" size="1">
-                  NOTE: <br /> Set Boon/Bane BEFORE setting merge level.{" "}
-                </font>
-              </div>
-            </div>
-          </span>
-          {/* Weapon Display */}
-          <span className="column">
-            <img
-              src={misc.weapon_skill.image}
-              alt={misc.weapon_skill.name}
-              width="35"
-            />
-            <div className="dropdown">
-              <button className="button">
-                {this.props.details.weaponName
-                  ? this.props.details.weaponName
-                  : "None"}
-              </button>
-            </div>
-          </span>
-        </div>
-        {/* Row 3 - Attack and Speed */}
-        <div className="columns">
-          <span className="column is-narrow">
-            <font size="5">
-              <b> ATK: </b>
-            </font>
-            <div
-              className={
-                this.props.details.noVariation
-                  ? "dropdown"
-                  : this.state.merges === 0
-                    ? "dropdown is-hoverable"
-                    : "dropdown"
-              }
-            >
-              <div className="dropdown-trigger">
-                <button
-                  className={
-                    !this.state.atkBane
-                      ? !this.state.atkBoon ? "button" : "button-boon"
-                      : "button-bane"
-                  }
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>
-                    {this.state.atk
-                      ? this.state.atkMergeBonus + this.state.atk
-                      : "Select"}
-                  </span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true" />
-                  </span>
-                </button>
-              </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <a
-                    className="dropdown-item-bane"
-                    onClick={
-                      this.props.details.atk ? this.handleAtkClickBane : null
-                    }
-                  >
-                    {this.props.details.atk
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.atkBonus
-                            ? this.props.details.atk[0] +
-                              this.props.details.weapon +
-                              this.props.details.bonusValueAtk
-                            : this.props.details.atk[0] +
-                              this.props.details.weapon
-                          : this.props.details.atk[0]
-                        : this.state.equipped
-                          ? this.props.details.atkBonus
-                            ? this.props.details.atkMin[0] +
-                              this.props.details.weapon +
-                              this.props.details.bonusValueAtk
-                            : this.props.details.atkMin[0] +
-                              this.props.details.weapon
-                          : this.props.details.atkMin[0]
-                      : "Bane"}
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.atk ? this.handleAtkClickNeutral : null
-                    }
-                  >
-                    {this.props.details.atk
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.atkBonus
-                            ? this.props.details.atk[1] +
-                              this.props.details.weapon +
-                              this.props.details.bonusValueAtk
-                            : this.props.details.atk[1] +
-                              this.props.details.weapon
-                          : this.props.details.atk[1]
-                        : this.state.equipped
-                          ? this.props.details.atkBonus
-                            ? this.props.details.atkMin[1] +
-                              this.props.details.weapon +
-                              this.props.details.bonusValueAtk
-                            : this.props.details.atkMin[1] +
-                              this.props.details.weapon
-                          : this.props.details.atkMin[1]
-                      : "Neutral"}
-                  </a>
-                  <a
-                    className="dropdown-item-boon"
-                    onClick={
-                      this.props.details.atk ? this.handleAtkClickBoon : null
-                    }
-                  >
-                    {this.props.details.atk
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.atkBonus
-                            ? this.props.details.atk[2] +
-                              this.props.details.weapon +
-                              this.props.details.bonusValueAtk
-                            : this.props.details.atk[2] +
-                              this.props.details.weapon
-                          : this.props.details.atk[2]
-                        : this.state.equipped
-                          ? this.props.details.atkBonus
-                            ? this.props.details.atkMin[2] +
-                              this.props.details.weapon +
-                              this.props.details.bonusValueAtk
-                            : this.props.details.atkMin[2] +
-                              this.props.details.weapon
-                          : this.props.details.atkMin[2]
-                      : "Boon"}
-                  </a>
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle0MergeClick : null
+                      }
+                    >
+                      +0
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle1MergeClick : null
+                      }
+                    >
+                      +1
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle2MergeClick : null
+                      }
+                    >
+                      +2
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle3MergeClick : null
+                      }
+                    >
+                      +3
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle4MergeClick : null
+                      }
+                    >
+                      +4
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle5MergeClick : null
+                      }
+                    >
+                      +5
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle6MergeClick : null
+                      }
+                    >
+                      +6
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle7MergeClick : null
+                      }
+                    >
+                      +7
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle8MergeClick : null
+                      }
+                    >
+                      +8
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle9MergeClick : null
+                      }
+                    >
+                      +9
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.name ? this.handle10MergeClick : null
+                      }
+                    >
+                      +10
+                    </a>
+                  </div>
+                  <font color="red" size="1">
+                    NOTE: <br /> Set Boon/Bane BEFORE setting merge level.{" "}
+                  </font>
                 </div>
               </div>
-            </div>
-          </span>
-          <span className="column is-narrow">
-            <font size="5">
-              <b> SPD: </b>
-            </font>
-            <div
-              className={
-                this.props.details.noVariation
-                  ? "dropdown"
-                  : this.state.merges === 0
-                    ? "dropdown is-hoverable"
-                    : "dropdown"
-              }
-            >
-              <div className="dropdown-trigger">
-                <button
-                  className={
-                    !this.state.spdBane
-                      ? !this.state.spdBoon ? "button" : "button-boon"
-                      : "button-bane"
-                  }
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>
-                    {this.state.spd
-                      ? this.state.spdMergeBonus + this.state.spd
-                      : "Select"}
-                  </span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true" />
-                  </span>
-                </button>
+            </span>
+            {/* Weapon Display */}
+            <span className="column">
+              <img
+                src={misc.weapon_skill.image}
+                alt={misc.weapon_skill.name}
+                width="35"
+              />
+              <div className="dropdown">
+                <a className="button">
+                  {this.props.details.weaponName
+                    ? this.props.details.weaponName
+                    : "None"}
+                </a>
               </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <a
-                    className="dropdown-item-bane"
-                    onClick={
-                      this.props.details.spd ? this.handleSpdClickBane : null
+            </span>
+          </div>
+          {/* Row 3 - Attack and Speed */}
+          <div className="columns">
+            <span className="column is-narrow">
+              <font size="5">
+                <b> ATK: </b>
+              </font>
+              <div
+                className={
+                  this.props.details.noVariation
+                    ? "dropdown"
+                    : this.state.merges === 0
+                      ? "dropdown is-hoverable"
+                      : "dropdown"
+                }
+              >
+                <div className="dropdown-trigger">
+                  <button
+                    className={
+                      !this.state.atkBane
+                        ? !this.state.atkBoon ? "button" : "button-boon"
+                        : "button-bane"
                     }
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu"
                   >
-                    {this.props.details.spd
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.spdBonus
-                            ? this.props.details.spd[0] +
-                              this.props.details.bonusValueSpd
+                    <span>
+                      {this.state.atk
+                        ? this.state.atkMergeBonus + this.state.atk
+                        : "Select"}
+                    </span>
+                    {this.props.details.noVariation ? null : (
+                      <span className="icon is-small">
+                        <i className="fas fa-angle-down" aria-hidden="true" />
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
+                    <a
+                      className="dropdown-item-bane"
+                      onClick={
+                        this.props.details.atk ? this.handleAtkClickBane : null
+                      }
+                    >
+                      {this.props.details.atk
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.atkBonus
+                              ? this.props.details.atk[0] +
+                                this.props.details.weapon +
+                                this.props.details.bonusValueAtk
+                              : this.props.details.atk[0] +
+                                this.props.details.weapon
+                            : this.props.details.atk[0]
+                          : this.state.equipped
+                            ? this.props.details.atkBonus
+                              ? this.props.details.atkMin[0] +
+                                this.props.details.weapon +
+                                this.props.details.bonusValueAtk
+                              : this.props.details.atkMin[0] +
+                                this.props.details.weapon
+                            : this.props.details.atkMin[0]
+                        : "Bane"}
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.atk
+                          ? this.handleAtkClickNeutral
+                          : null
+                      }
+                    >
+                      {this.props.details.atk
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.atkBonus
+                              ? this.props.details.atk[1] +
+                                this.props.details.weapon +
+                                this.props.details.bonusValueAtk
+                              : this.props.details.atk[1] +
+                                this.props.details.weapon
+                            : this.props.details.atk[1]
+                          : this.state.equipped
+                            ? this.props.details.atkBonus
+                              ? this.props.details.atkMin[1] +
+                                this.props.details.weapon +
+                                this.props.details.bonusValueAtk
+                              : this.props.details.atkMin[1] +
+                                this.props.details.weapon
+                            : this.props.details.atkMin[1]
+                        : "Neutral"}
+                    </a>
+                    <a
+                      className="dropdown-item-boon"
+                      onClick={
+                        this.props.details.atk ? this.handleAtkClickBoon : null
+                      }
+                    >
+                      {this.props.details.atk
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.atkBonus
+                              ? this.props.details.atk[2] +
+                                this.props.details.weapon +
+                                this.props.details.bonusValueAtk
+                              : this.props.details.atk[2] +
+                                this.props.details.weapon
+                            : this.props.details.atk[2]
+                          : this.state.equipped
+                            ? this.props.details.atkBonus
+                              ? this.props.details.atkMin[2] +
+                                this.props.details.weapon +
+                                this.props.details.bonusValueAtk
+                              : this.props.details.atkMin[2] +
+                                this.props.details.weapon
+                            : this.props.details.atkMin[2]
+                        : "Boon"}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </span>
+            <span className="column is-narrow">
+              <font size="5">
+                <b> SPD: </b>
+              </font>
+              <div
+                className={
+                  this.props.details.noVariation
+                    ? "dropdown"
+                    : this.state.merges === 0
+                      ? "dropdown is-hoverable"
+                      : "dropdown"
+                }
+              >
+                <div className="dropdown-trigger">
+                  <button
+                    className={
+                      !this.state.spdBane
+                        ? !this.state.spdBoon ? "button" : "button-boon"
+                        : "button-bane"
+                    }
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu"
+                  >
+                    <span>
+                      {this.state.spd
+                        ? this.state.spdMergeBonus + this.state.spd
+                        : "Select"}
+                    </span>
+                    {this.props.details.noVariation ? null : (
+                      <span className="icon is-small">
+                        <i className="fas fa-angle-down" aria-hidden="true" />
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
+                    <a
+                      className="dropdown-item-bane"
+                      onClick={
+                        this.props.details.spd ? this.handleSpdClickBane : null
+                      }
+                    >
+                      {this.props.details.spd
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.spdBonus
+                              ? this.props.details.spd[0] +
+                                this.props.details.bonusValueSpd
+                              : this.props.details.spd[0]
                             : this.props.details.spd[0]
-                          : this.props.details.spd[0]
-                        : this.state.equipped
-                          ? this.props.details.spdBonus
-                            ? this.props.details.spdMin[0] +
-                              this.props.details.bonusValueSpd
+                          : this.state.equipped
+                            ? this.props.details.spdBonus
+                              ? this.props.details.spdMin[0] +
+                                this.props.details.bonusValueSpd
+                              : this.props.details.spdMin[0]
                             : this.props.details.spdMin[0]
-                          : this.props.details.spdMin[0]
-                      : "Bane"}
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.spd ? this.handleSpdClickNeutral : null
-                    }
-                  >
-                    {this.props.details.spd
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.spdBonus
-                            ? this.props.details.spd[1] +
-                              this.props.details.bonusValueSpd
+                        : "Bane"}
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.spd
+                          ? this.handleSpdClickNeutral
+                          : null
+                      }
+                    >
+                      {this.props.details.spd
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.spdBonus
+                              ? this.props.details.spd[1] +
+                                this.props.details.bonusValueSpd
+                              : this.props.details.spd[1]
                             : this.props.details.spd[1]
-                          : this.props.details.spd[1]
-                        : this.state.equipped
-                          ? this.props.details.spdBonus
-                            ? this.props.details.spdMin[1] +
-                              this.props.details.bonusValueSpd
+                          : this.state.equipped
+                            ? this.props.details.spdBonus
+                              ? this.props.details.spdMin[1] +
+                                this.props.details.bonusValueSpd
+                              : this.props.details.spdMin[1]
                             : this.props.details.spdMin[1]
-                          : this.props.details.spdMin[1]
-                      : "Neutral"}
-                  </a>
-                  <a
-                    className="dropdown-item-boon"
-                    onClick={
-                      this.props.details.spd ? this.handleSpdClickBoon : null
-                    }
-                  >
-                    {this.props.details.spd
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.spdBonus
-                            ? this.props.details.spd[2] +
-                              this.props.details.bonusValueSpd
+                        : "Neutral"}
+                    </a>
+                    <a
+                      className="dropdown-item-boon"
+                      onClick={
+                        this.props.details.spd ? this.handleSpdClickBoon : null
+                      }
+                    >
+                      {this.props.details.spd
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.spdBonus
+                              ? this.props.details.spd[2] +
+                                this.props.details.bonusValueSpd
+                              : this.props.details.spd[2]
                             : this.props.details.spd[2]
-                          : this.props.details.spd[2]
-                        : this.state.equipped
-                          ? this.props.details.spdBonus
-                            ? this.props.details.spdMin[2] +
-                              this.props.details.bonusValueSpd
+                          : this.state.equipped
+                            ? this.props.details.spdBonus
+                              ? this.props.details.spdMin[2] +
+                                this.props.details.bonusValueSpd
+                              : this.props.details.spdMin[2]
                             : this.props.details.spdMin[2]
-                          : this.props.details.spdMin[2]
-                      : "Boon"}
-                  </a>
+                        : "Boon"}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </span>
-        </div>
-        {/* Row 4 - Defense and Resistance */}
-        <div className="columns">
-          <span className="column is-narrow">
-            <font size="5">
-              <b> DEF: </b>
-            </font>
-            <div
-              className={
-                this.props.details.noVariation
-                  ? "dropdown"
-                  : this.state.merges === 0
-                    ? "dropdown is-hoverable"
-                    : "dropdown"
-              }
-            >
-              <div className="dropdown-trigger">
-                <button
-                  className={
-                    !this.state.defBane
-                      ? !this.state.defBoon ? "button" : "button-boon"
-                      : "button-bane"
-                  }
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>
-                    {this.state.def
-                      ? this.state.defMergeBonus + this.state.def
-                      : "Select"}
-                  </span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true" />
-                  </span>
-                </button>
-              </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <a
-                    className="dropdown-item-bane"
-                    onClick={
-                      this.props.details.def ? this.handleDefClickBane : null
+            </span>
+          </div>
+          {/* Row 4 - Defense and Resistance */}
+          <div className="columns">
+            <span className="column is-narrow">
+              <font size="5">
+                <b> DEF: </b>
+              </font>
+              <div
+                className={
+                  this.props.details.noVariation
+                    ? "dropdown"
+                    : this.state.merges === 0
+                      ? "dropdown is-hoverable"
+                      : "dropdown"
+                }
+              >
+                <div className="dropdown-trigger">
+                  <button
+                    className={
+                      !this.state.defBane
+                        ? !this.state.defBoon ? "button" : "button-boon"
+                        : "button-bane"
                     }
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu"
                   >
-                    {this.props.details.def
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.defBonus
-                            ? this.props.details.def[0] +
-                              this.props.details.bonusValueDef
+                    <span>
+                      {this.state.def
+                        ? this.state.defMergeBonus + this.state.def
+                        : "Select"}
+                    </span>
+                    {this.props.details.noVariation ? null : (
+                      <span className="icon is-small">
+                        <i className="fas fa-angle-down" aria-hidden="true" />
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
+                    <a
+                      className="dropdown-item-bane"
+                      onClick={
+                        this.props.details.def ? this.handleDefClickBane : null
+                      }
+                    >
+                      {this.props.details.def
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.defBonus
+                              ? this.props.details.def[0] +
+                                this.props.details.bonusValueDef
+                              : this.props.details.def[0]
                             : this.props.details.def[0]
-                          : this.props.details.def[0]
-                        : this.state.equipped
-                          ? this.props.details.defBonus
-                            ? this.props.details.defMin[0] +
-                              this.props.details.bonusValueDef
+                          : this.state.equipped
+                            ? this.props.details.defBonus
+                              ? this.props.details.defMin[0] +
+                                this.props.details.bonusValueDef
+                              : this.props.details.defMin[0]
                             : this.props.details.defMin[0]
-                          : this.props.details.defMin[0]
-                      : "Bane"}
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.def ? this.handleDefClickNeutral : null
-                    }
-                  >
-                    {this.props.details.def
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.defBonus
-                            ? this.props.details.def[1] +
-                              this.props.details.bonusValueDef
+                        : "Bane"}
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.def
+                          ? this.handleDefClickNeutral
+                          : null
+                      }
+                    >
+                      {this.props.details.def
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.defBonus
+                              ? this.props.details.def[1] +
+                                this.props.details.bonusValueDef
+                              : this.props.details.def[1]
                             : this.props.details.def[1]
-                          : this.props.details.def[1]
-                        : this.state.equipped
-                          ? this.props.details.defBonus
-                            ? this.props.details.defMin[1] +
-                              this.props.details.bonusValueDef
+                          : this.state.equipped
+                            ? this.props.details.defBonus
+                              ? this.props.details.defMin[1] +
+                                this.props.details.bonusValueDef
+                              : this.props.details.defMin[1]
                             : this.props.details.defMin[1]
-                          : this.props.details.defMin[1]
-                      : "Neutral"}
-                  </a>
-                  <a
-                    className="dropdown-item-boon"
-                    onClick={
-                      this.props.details.def ? this.handleDefClickBoon : null
-                    }
-                  >
-                    {this.props.details.def
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.defBonus
-                            ? this.props.details.def[2] +
-                              this.props.details.bonusValueDef
+                        : "Neutral"}
+                    </a>
+                    <a
+                      className="dropdown-item-boon"
+                      onClick={
+                        this.props.details.def ? this.handleDefClickBoon : null
+                      }
+                    >
+                      {this.props.details.def
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.defBonus
+                              ? this.props.details.def[2] +
+                                this.props.details.bonusValueDef
+                              : this.props.details.def[2]
                             : this.props.details.def[2]
-                          : this.props.details.def[2]
-                        : this.state.equipped
-                          ? this.props.details.defBonus
-                            ? this.props.details.defMin[2] +
-                              this.props.details.bonusValueDef
+                          : this.state.equipped
+                            ? this.props.details.defBonus
+                              ? this.props.details.defMin[2] +
+                                this.props.details.bonusValueDef
+                              : this.props.details.defMin[2]
                             : this.props.details.defMin[2]
-                          : this.props.details.defMin[2]
-                      : "Boon"}
-                  </a>
+                        : "Boon"}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </span>
-          <span className="column is-narrow">
-            <font size="5">
-              <b> RES: </b>
-            </font>
-            <div
-              className={
-                this.props.details.noVariation
-                  ? "dropdown"
-                  : this.state.merges === 0
-                    ? "dropdown is-hoverable"
-                    : "dropdown"
-              }
-            >
-              <div className="dropdown-trigger">
-                <button
-                  className={
-                    !this.state.resBane
-                      ? !this.state.resBoon ? "button" : "button-boon"
-                      : "button-bane"
-                  }
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>
-                    {this.state.res
-                      ? this.state.resMergeBonus + this.state.res
-                      : "Select"}
-                  </span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true" />
-                  </span>
-                </button>
-              </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <a
-                    className="dropdown-item-bane"
-                    onClick={
-                      this.props.details.res ? this.handleResClickBane : null
+            </span>
+            <span className="column is-narrow">
+              <font size="5">
+                <b> RES: </b>
+              </font>
+              <div
+                className={
+                  this.props.details.noVariation
+                    ? "dropdown"
+                    : this.state.merges === 0
+                      ? "dropdown is-hoverable"
+                      : "dropdown"
+                }
+              >
+                <div className="dropdown-trigger">
+                  <button
+                    className={
+                      !this.state.resBane
+                        ? !this.state.resBoon ? "button" : "button-boon"
+                        : "button-bane"
                     }
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu"
                   >
-                    {this.props.details.res
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.resBonus
-                            ? this.props.details.res[0] +
-                              this.props.details.bonusValueRes
+                    <span>
+                      {this.state.res
+                        ? this.state.resMergeBonus + this.state.res
+                        : "Select"}
+                    </span>
+                    {this.props.details.noVariation ? null : (
+                      <span className="icon is-small">
+                        <i className="fas fa-angle-down" aria-hidden="true" />
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
+                    <a
+                      className="dropdown-item-bane"
+                      onClick={
+                        this.props.details.res ? this.handleResClickBane : null
+                      }
+                    >
+                      {this.props.details.res
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.resBonus
+                              ? this.props.details.res[0] +
+                                this.props.details.bonusValueRes
+                              : this.props.details.res[0]
                             : this.props.details.res[0]
-                          : this.props.details.res[0]
-                        : this.state.equipped
-                          ? this.props.details.resBonus
-                            ? this.props.details.resMin[0] +
-                              this.props.details.bonusValueRes
+                          : this.state.equipped
+                            ? this.props.details.resBonus
+                              ? this.props.details.resMin[0] +
+                                this.props.details.bonusValueRes
+                              : this.props.details.resMin[0]
                             : this.props.details.resMin[0]
-                          : this.props.details.resMin[0]
-                      : "Bane"}
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    onClick={
-                      this.props.details.res ? this.handleResClickNeutral : null
-                    }
-                  >
-                    {this.props.details.res
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.resBonus
-                            ? this.props.details.res[1] +
-                              this.props.details.bonusValueRes
+                        : "Bane"}
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      onClick={
+                        this.props.details.res
+                          ? this.handleResClickNeutral
+                          : null
+                      }
+                    >
+                      {this.props.details.res
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.resBonus
+                              ? this.props.details.res[1] +
+                                this.props.details.bonusValueRes
+                              : this.props.details.res[1]
                             : this.props.details.res[1]
-                          : this.props.details.res[1]
-                        : this.state.equipped
-                          ? this.props.details.resBonus
-                            ? this.props.details.resMin[1] +
-                              this.props.details.bonusValueRes
+                          : this.state.equipped
+                            ? this.props.details.resBonus
+                              ? this.props.details.resMin[1] +
+                                this.props.details.bonusValueRes
+                              : this.props.details.resMin[1]
                             : this.props.details.resMin[1]
-                          : this.props.details.resMin[1]
-                      : "Neutral"}
-                  </a>
-                  <a
-                    className="dropdown-item-boon"
-                    onClick={
-                      this.props.details.res ? this.handleResClickBoon : null
-                    }
-                  >
-                    {this.props.details.res
-                      ? this.state.maxLvl
-                        ? this.state.equipped
-                          ? this.props.details.resBonus
-                            ? this.props.details.res[2] +
-                              this.props.details.bonusValueRes
+                        : "Neutral"}
+                    </a>
+                    <a
+                      className="dropdown-item-boon"
+                      onClick={
+                        this.props.details.res ? this.handleResClickBoon : null
+                      }
+                    >
+                      {this.props.details.res
+                        ? this.state.maxLvl
+                          ? this.state.equipped
+                            ? this.props.details.resBonus
+                              ? this.props.details.res[2] +
+                                this.props.details.bonusValueRes
+                              : this.props.details.res[2]
                             : this.props.details.res[2]
-                          : this.props.details.res[2]
-                        : this.state.equipped
-                          ? this.props.details.resBonus
-                            ? this.props.details.resMin[2] +
-                              this.props.details.bonusValueRes
+                          : this.state.equipped
+                            ? this.props.details.resBonus
+                              ? this.props.details.resMin[2] +
+                                this.props.details.bonusValueRes
+                              : this.props.details.resMin[2]
                             : this.props.details.resMin[2]
-                          : this.props.details.resMin[2]
-                      : "Boon"}
-                  </a>
+                        : "Boon"}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </span>
-        </div>
-        {/* Add Button */}
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div className="button is-large">
-          <p> Add to Barracks </p>
-        </div>
+            </span>
+          </div>
+          {/* Add Button */}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button className="button is-large">Add to Barracks</button>
+        </form>
       </div>
     );
   }

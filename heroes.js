@@ -2665,7 +2665,7 @@ const heroes = {
     skillA: "Close Def 3",
     skillB: "Windsweep 3",
     resBonus: true,
-    resBonusValue: 5,
+    bonusValueRes: 5,
     noVariation: true,
     hp: [40, 40, 40],
     atk: [31, 31, 31],
